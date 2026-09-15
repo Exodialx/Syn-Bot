@@ -1,0 +1,1 @@
+worker: npx tsx src/bot.ts
