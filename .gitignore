@@ -1,0 +1,11 @@
+node_modules/
+auth_info_baileys/
+dist/
+data/*.db
+data/*.db-*
+data/players.json
+*.log
+.DS_Store
+
+nsfw/*
+!nsfw/.gitkeep
