@@ -1,0 +1,17 @@
+{
+  "entities": {
+    "roles": ["mafia", "hitman", "businessman"],
+    "games": ["syndicates", "fisch", "konoha", "utility"],
+    "commands": [
+      "start", "menu", "help", "profile", "daily", "bank", "deposit", "withdraw", "rob", "raid",
+      "hit", "crime", "crypto", "shop", "buy", "inv", "equip", "role", "biz", "collect", "heist",
+      "poker", "bj", "blackjack", "dice", "slots", "coinflip", "spell", "riddle", "battle", "pay",
+      "lb", "leaderboard", "news", "jail", "bail", "escape", "work", "launder", "guild", "territory",
+      "bounty", "contracts", "guards", "hire", "fire", "cd", "cooldowns", "achievements", "badges",
+      "wanted", "shell", "takeover", "crew", "recruit", "racket", "stalk", "ghost", "blackmarket",
+      "ai", "teach", "synai"
+    ],
+    "cryptos": ["btc", "eth", "syn", "coin", "token"],
+    "places": ["bank", "prison", "jail", "hospital", "shop", "store", "market", "blackmarket"]
+  }
+}

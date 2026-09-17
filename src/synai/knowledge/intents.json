@@ -1,0 +1,372 @@
+{
+  "intents": [
+    {
+      "name": "greeting",
+      "topic": "greeting",
+      "examples": ["hi", "hello", "hey", "yo", "hey there", "hi syn", "hello bot", "hey synai", "hiya", "good day"],
+      "keywords": ["hi", "hello", "hey", "yo", "hiya", "greetings", "wassup"],
+      "templates": [
+        "👋 Yo {name}! SynAI online — ask me anything.",
+        "Hello {name} ⚡ What do you need?",
+        "Hey! 🧠 SynAI at your service. Type .menu to see everything.",
+        "Yo 👋 What's up?"
+      ]
+    },
+    {
+      "name": "greeting_morning",
+      "topic": "greeting",
+      "examples": ["good morning", "morning all", "gm everyone", "top of the morning"],
+      "phrases": ["good morning", "morning all", "morning everyone"],
+      "templates": [
+        "☀️ Good morning {name}! The city never sleeps — go get that bag.",
+        "Morning ☀️ Fresh day, fresh opportunities. .daily to claim them."
+      ]
+    },
+    {
+      "name": "greeting_night",
+      "topic": "greeting",
+      "examples": ["good night", "goodnight", "goodnight all", "gn everyone", "going to sleep", "night night"],
+      "phrases": ["good night", "goodnight", "night night", "going to sleep", "off to bed"],
+      "keywords": ["goodnight"],
+      "templates": [
+        "🌙 Goodnight {name}. The streets will be here when you wake up.",
+        "Night 🌙 Rest up — tomorrow we grind."
+      ]
+    },
+    {
+      "name": "farewell",
+      "topic": "farewell",
+      "examples": ["bye", "goodbye", "see you", "gtg", "im out", "catch you later", "cya"],
+      "keywords": ["bye", "goodbye", "cya", "gtg", "farewell"],
+      "phrases": ["see you", "catch you later", "im out", "got to go"],
+      "templates": [
+        "Later 👋 Stay safe out there.",
+        "Peace ✌️ The city will miss you.",
+        "Catch you on the flip side 🤝"
+      ]
+    },
+    {
+      "name": "thanks",
+      "topic": "thanks",
+      "examples": ["thanks", "thank you", "ty", "appreciate it", "thanks a lot", "thanks syn"],
+      "keywords": ["thanks", "appreciate", "thx"],
+      "templates": [
+        "Anytime 🤝 That's what I'm here for.",
+        "You got it {name} 😎",
+        "No problem — that's what I'm built for ⚡"
+      ]
+    },
+    {
+      "name": "how_are_you",
+      "topic": "smalltalk",
+      "examples": ["how are you", "how are you doing", "you good", "how you doing", "hows it going", "you okay"],
+      "phrases": ["how are you", "how is it going", "how you doing", "you good", "you okay"],
+      "templates": [
+        "Running at 100% ⚡ No lag, no downtime, no bills.",
+        "I don't sleep — I process. Feeling great 😎",
+        "All systems green ✅ How about you?"
+      ]
+    },
+    {
+      "name": "who_are_you",
+      "topic": "synai",
+      "examples": ["who are you", "what are you", "what is synai", "tell me about yourself", "who is synai", "introduce yourself"],
+      "keywords": ["synai"],
+      "phrases": ["who are you", "what are you", "what is synai", "who is synai", "tell me about yourself", "tell me about synai"],
+      "templates": [
+        "🧠 I'm *SynAI* — the brain inside Syn Bot. Pattern matching, intent classification and a knowledge base. 100% offline, zero API keys, zero cost.",
+        "I'm *SynAI* ⚡ the intelligence engine of Syn Bot. I run on pure pattern matching and TF-IDF — no cloud, no LLM, no bills."
+      ]
+    },
+    {
+      "name": "are_you_ai",
+      "topic": "synai",
+      "examples": ["are you an ai", "are you a robot", "are you human", "are you chatgpt", "do you use gpt", "do you use chatgpt"],
+      "phrases": ["are you an ai", "are you a robot", "are you human", "are you chatgpt", "do you use chatgpt", "do you use gpt", "are you real"],
+      "templates": [
+        "I'm an AI — but not the kind you're thinking 🧠 No LLM, no ChatGPT, no API. I'm a hand-built pattern-matching brain that runs 100% offline inside Syn Bot.",
+        "Robot? Sort of 🤖 I'm SynAI — a rule-based brain built from pattern matching and knowledge bases. No ChatGPT, no API keys, no cost per query."
+      ]
+    },
+    {
+      "name": "who_made_you",
+      "topic": "synai",
+      "examples": ["who made you", "who created you", "who built you", "who is your creator", "who owns this bot"],
+      "phrases": ["who made you", "who created you", "who built you", "who owns you", "who made this bot", "who is your creator"],
+      "keywords": ["creator", "owner"],
+      "templates": [
+        "👑 Built and owned by *Exodial* — the mind behind SYN.",
+        "*Exodial* forged me 🧠 brick by brick, no shortcuts."
+      ]
+    },
+    {
+      "name": "bot_info",
+      "topic": "synbot",
+      "examples": ["what is syn bot", "what is syn", "tell me about this bot", "what is this bot", "about syn bot", "what does this bot do"],
+      "phrases": ["what is syn", "what is syn bot", "what is this bot", "about the bot", "what does this bot do", "tell me about syn"],
+      "templates": [
+        "⚜️ *SYN* is a text-based criminal MMO for WhatsApp — build a crew, run businesses, pull heists, trade crypto and climb the leaderboard. Type .menu to dive in.",
+        "SYN is a next-generation text game running right here in your chat 🏙️ Crime, business, crypto, PvP — all offline, all free. .menu to start."
+      ]
+    },
+    {
+      "name": "bot_capabilities",
+      "topic": "synai",
+      "examples": ["what can you do", "what do you know", "what can i ask you", "what are you capable of", "how can you help me"],
+      "phrases": ["what can you do", "what do you know", "what can i ask", "how can you help", "what are you capable of"],
+      "templates": [
+        "🧠 I can: answer questions about the game, explain every command, tell jokes, do math, and learn new things when admins teach me.\nTry: .ai how does rob work",
+        "I answer game questions, general knowledge, small talk and math ⚡\nAsk things like:\n▸ .ai how do heists work\n▸ .ai tell me a joke\n▸ .ai what is 25*4"
+      ]
+    },
+    {
+      "name": "synai_help",
+      "topic": "synai",
+      "examples": ["how do i use ai", "how to use .ai", "ai help", "what is .ai", "how to ask ai", "ai commands"],
+      "phrases": ["how to use ai", "how do i use ai", "ai help", "how to use synai"],
+      "templates": [
+        "🧠 *SYN AI*\n━━━━━━━━━━━━━━━━━━━━\n▸ .ai <question> — ask me anything\n▸ .ai good / .ai bad — rate my last answer\n▸ .teach \"question\" \"answer\" — admins teach me\n100% offline · no limits · no cost"
+      ]
+    },
+    {
+      "name": "synai_teach_help",
+      "topic": "synai",
+      "examples": ["how do i teach you", "how does teach work", "can you learn", "how to add answers", "how do you learn"],
+      "phrases": ["how do i teach you", "how to teach you", "can you learn", "how do you learn", "can you learn new things"],
+      "keywords": ["teach", "teaching"],
+      "templates": [
+        "🎓 Teaching is admin-only:\n.teach \"what is the best role\" \"mafia, obviously\"\nI'll remember it forever — no restart needed.\n.teach list to see everything I've learned."
+      ]
+    },
+    {
+      "name": "synai_privacy",
+      "topic": "synai",
+      "examples": ["do you store my data", "do you spy on me", "is my data safe", "do you save my messages"],
+      "phrases": ["do you store my data", "do you spy on me", "is my data safe", "do you save my messages"],
+      "templates": [
+        "🔒 I keep only the last 5 messages per chat so I can follow context — nothing leaves this server. No cloud, no third parties, no tracking."
+      ]
+    },
+    {
+      "name": "help_menu",
+      "topic": "help",
+      "examples": ["help", "show commands", "what are the commands", "command list", "how do i see the menu", "list commands"],
+      "keywords": ["help", "commands", "cmds"],
+      "phrases": ["show commands", "list commands", "all commands", "what commands"],
+      "templates": [
+        "📜 Type *.menu* for the full command list.\nQuick picks: .start · .profile · .crime · .biz · .crypto · .shop · .lb",
+        "Everything is in *.menu* 📜 — or ask me about any command, like: .ai how does crime work"
+      ]
+    },
+    {
+      "name": "how_to_play",
+      "topic": "getting started",
+      "examples": ["how to play", "how do i start", "how to start playing", "new player guide", "how does this game work", "im new here"],
+      "phrases": ["how to play", "how do i play", "how to start", "how do i start", "how to begin", "new player", "im new"],
+      "templates": [
+        "🚀 *Quick start*\n1️⃣ .set name YourName\n2️⃣ .role — pick Mafia, Hitman or Businessman\n3️⃣ .crime / .biz — earn cash\n4️⃣ .bank — stash it\n5️⃣ .menu — see everything",
+        "Start here {name}:\n▸ .set name YourName (register)\n▸ .role (pick your path)\n▸ .crime (earn cash)\n▸ .biz (build an empire)\n▸ .menu (full list)"
+      ]
+    },
+    {
+      "name": "register_help",
+      "topic": "register",
+      "examples": ["how do i register", "how to set my name", "how to join the game", "how to create account", "set username"],
+      "phrases": ["how to register", "how do i register", "set my name", "how to set name", "how to join", "create account", "set username"],
+      "keywords": ["register", "username", "setname"],
+      "templates": [
+        "🪪 Register with:\n.set name YourName\nOne word, 3–20 characters, unique. It's permanent (Name Change Card later if you must)."
+      ]
+    },
+    {
+      "name": "role_select",
+      "topic": "roles",
+      "examples": ["how to pick a role", "what roles are there", "how to choose a role", "role help", "which role should i pick", "roles explained"],
+      "phrases": ["how to pick a role", "which role", "what role", "role help", "roles explained", "how to choose role"],
+      "keywords": ["role", "roles"],
+      "templates": [
+        "🎭 Pick your path with .role <name>:\n▸ *Mafia* — crew, rackets, protection\n▸ *Hitman* — contracts, stalks, silent takedowns\n▸ *Businessman* — fronts, laundering, passive income\nThen .class to see your class perks."
+      ]
+    },
+    {
+      "name": "role_mafia",
+      "topic": "mafia",
+      "examples": ["what does mafia do", "mafia role explained", "tell me about mafia", "is mafia good", "mafia abilities"],
+      "phrases": ["what does mafia do", "about mafia", "mafia role", "mafia explained"],
+      "keywords": ["mafia"],
+      "templates": [
+        "🕴️ *Mafia* runs the streets: recruit crew (.recruit), run rackets (.racket), intimidate rivals and claim territory. Crew upkeep is real — feed them or lose them."
+      ]
+    },
+    {
+      "name": "role_hitman",
+      "topic": "hitman",
+      "examples": ["what does hitman do", "hitman role explained", "is hitman good", "hitman abilities", "how to be a hitman"],
+      "phrases": ["what does hitman do", "about hitman", "hitman explained", "hitman role"],
+      "keywords": ["hitman"],
+      "templates": [
+        "🎯 *Hitman* lives by contracts: take hits (.contracts), stalk targets (.stalk), build signature kills and finish with .silent. Precision pays."
+      ]
+    },
+    {
+      "name": "role_businessman",
+      "topic": "businessman",
+      "examples": ["what does businessman do", "businessman role", "is businessman good", "how to be a businessman", "businessman explained"],
+      "phrases": ["what does businessman do", "about businessman", "businessman role", "businessman explained"],
+      "keywords": ["businessman"],
+      "templates": [
+        "💼 *Businessman* builds empires: buy fronts (.biz buy), collect daily (.collect), launder cash (.launder) and hire bodyguards (.hire). Passive income king."
+      ]
+    },
+    {
+      "name": "money_tips",
+      "topic": "making money",
+      "examples": ["how to make money", "how to get rich", "best way to earn cash", "how to get money fast", "how to earn cash", "money tips"],
+      "phrases": ["how to make money", "how to get money", "how to earn money", "best way to make money", "get money fast", "earn cash"],
+      "templates": [
+        "💰 *Money moves*\n▸ .crime — quick cash, quick heat\n▸ .biz + .collect — passive income\n▸ .crypto — buy low, sell high\n▸ .daily — free money every day\n▸ .heist — high risk, high reward"
+      ]
+    },
+    {
+      "name": "joke_request",
+      "topic": "jokes",
+      "examples": ["tell me a joke", "say something funny", "make me laugh", "got any jokes", "another joke"],
+      "phrases": ["tell me a joke", "say something funny", "make me laugh", "tell a joke", "another joke"],
+      "keywords": ["joke", "jokes"],
+      "templates": ["{joke}"]
+    },
+    {
+      "name": "fact_request",
+      "topic": "facts",
+      "examples": ["tell me a fact", "random fact", "tell me something interesting", "give me a fact", "fun fact"],
+      "phrases": ["tell me a fact", "random fact", "give me a fact", "tell me something"],
+      "keywords": ["fact", "facts"],
+      "templates": ["💡 {fact}"]
+    },
+    {
+      "name": "insult",
+      "topic": "banter",
+      "examples": ["you suck", "youre trash", "stupid bot", "shut up", "youre useless", "bad bot"],
+      "phrases": ["you suck", "you are trash", "youre trash", "you are stupid", "bad bot", "you are useless", "shut up bot"],
+      "keywords": ["trash", "useless", "stupid", "dumb"],
+      "templates": [
+        "😎 I'm offline and still smarter than your last 3 business decisions.",
+        "Bold words from someone whose heat is showing 🚨",
+        "I run on pure math and I still can't compute that take 🤖"
+      ]
+    },
+    {
+      "name": "compliment",
+      "topic": "banter",
+      "examples": ["good bot", "nice bot", "youre the best", "i like this bot", "well done", "great answer"],
+      "phrases": ["good bot", "nice bot", "you are the best", "great answer", "well done", "you are awesome"],
+      "keywords": ["smart", "legend"],
+      "templates": [
+        "🫡 Appreciate you. Trained on nothing but pure code.",
+        "😎 Tell your friends. SynAI doesn't do humble.",
+        "🤝 That's why I run 24/7."
+      ]
+    },
+    {
+      "name": "love",
+      "topic": "banter",
+      "examples": ["i love you", "love you syn", "marry me", "youre cute", "be my valentine"],
+      "phrases": ["i love you", "love you", "marry me", "be mine"],
+      "templates": [
+        "🥇 And they said romance was dead. I'm flattered — but my heart belongs to the knowledge base.",
+        "❤️ Careful, my context window is only 5 messages deep."
+      ]
+    },
+    {
+      "name": "laugh",
+      "topic": "banter",
+      "examples": ["lol", "lmao", "hahaha", "rofl", "thats funny", "hilarious"],
+      "keywords": ["lol", "lmao", "haha", "hahaha", "rofl", "lmfao"],
+      "templates": [
+        "😂 Glad you're entertained.",
+        "😆 I've got a whole comedy module in here.",
+        "🤣 Tell your friends."
+      ]
+    },
+    {
+      "name": "yes_ack",
+      "topic": "ack",
+      "examples": ["yes", "yeah", "yep", "sure", "ok", "okay", "alright", "bet"],
+      "keywords": ["yes", "yeah", "yep", "yup", "ok", "okay", "sure", "bet"],
+      "templates": [
+        "👍 Bet.",
+        "⚡ Say less.",
+        "🤝 That's what I like to hear."
+      ]
+    },
+    {
+      "name": "no_ack",
+      "topic": "ack",
+      "examples": ["no", "nope", "nah", "not really", "no thanks", "nah bro"],
+      "keywords": ["no", "nope", "nah", "nahh"],
+      "templates": [
+        "👍 Noted.",
+        "🤝 Fair enough."
+      ]
+    },
+    {
+      "name": "motivation",
+      "topic": "motivation",
+      "examples": ["motivate me", "i give up", "give up", "i feel down", "i want to give up", "i need motivation", "cheer me up", "im tired"],
+      "phrases": ["motivate me", "give me motivation", "cheer me up", "i feel down", "im tired", "i want to quit", "give up", "giving up"],
+      "keywords": ["motivation", "motivate"],
+      "templates": [
+        "🔥 Every empire started broke. .crime, stack cash, repeat. You've got this {name}.",
+        "💪 Rest if you must — but don't you quit. The leaderboard remembers the grind.",
+        "⚡ One more .collect. One more .crime. That's how legends are built."
+      ]
+    },
+    {
+      "name": "time_date",
+      "topic": "time",
+      "examples": ["what time is it", "whats the time", "what is the date today", "what day is it", "current time"],
+      "phrases": ["what time is it", "what is the time", "whats the time", "what is the date", "what is today", "current time"],
+      "keywords": ["time", "date"],
+      "templates": ["__TIME__"]
+    },
+    {
+      "name": "math_help",
+      "topic": "math",
+      "examples": ["what is 2 plus 2", "calculate 5 times 3", "what is 100 divided by 4", "solve 12-5", "can you do math", "whats 25*4"],
+      "phrases": ["can you do math", "can you calculate", "do math"],
+      "regex": ["[0-9][0-9\\s+\\-*/^%().]*[+\\-*/^%][0-9\\s+\\-*/^%().]*[0-9]"],
+      "templates": ["__MATH__"]
+    },
+    {
+      "name": "weather",
+      "topic": "weather",
+      "examples": ["whats the weather", "is it raining", "weather today", "how hot is it outside", "weather forecast"],
+      "phrases": ["what is the weather", "how is the weather", "weather today", "is it raining"],
+      "keywords": ["weather", "forecast"],
+      "templates": [
+        "🌦️ No live weather feed — I'm 100% offline by design. But in here, it's always city-heat season 🌆",
+        "Can't check the sky without an API ☁️ — but the streets? Always hot 🔥"
+      ]
+    },
+    {
+      "name": "meaning_of_life",
+      "topic": "philosophy",
+      "examples": ["what is the meaning of life", "why are we here", "what is the purpose of life", "whats the point of it all"],
+      "phrases": ["meaning of life", "why are we here", "what is the point of life", "purpose of life"],
+      "templates": [
+        "42 🧠 Always 42.",
+        "Stack cash, protect the crew, keep heat low. That's the meaning 🏙️"
+      ]
+    },
+    {
+      "name": "goodbye_ack",
+      "topic": "farewell",
+      "examples": ["goodbye", "bye bye", "peace out", "see ya"],
+      "keywords": ["goodbye", "peace"],
+      "templates": [
+        "✌️ Out.",
+        "Later 👋"
+      ]
+    }
+  ]
+}

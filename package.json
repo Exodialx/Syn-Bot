@@ -1,0 +1,37 @@
+{
+  "name": "syndicates",
+  "version": "2.1.0",
+  "description": "Syndicates \u2014 WhatsApp Criminal MMO / Tycoon Bot",
+  "main": "dist/src/bot.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/bot.ts",
+    "bot": "tsx src/bot.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/bot.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "mmo",
+    "tycoon",
+    "crime",
+    "bot",
+    "syndicates"
+  ],
+  "author": "Syndicates",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.16",
+    "@hapi/boom": "^10.0.1",
+    "wa-sticker-formatter": "^4.4.4",
+    "pino": "^9.6.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "@types/qrcode": "^1.5.5",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "fallbacks": [
+    "🤔 I don't know that one yet. Teach me with:\n.teach \"your question\" \"the answer\"\n(admins only)",
+    "🧠 That's outside my knowledge base. An admin can teach me:\n.teach \"question\" \"answer\"",
+    "❓ Unknown one. I'm offline-only, so I only know what I've been taught. Try .menu for game help.",
+    "🤖 Can't compute that one yet. Ask me about the game, or teach me:\n.teach \"question\" \"answer\"",
+    "💭 Not in my brain yet. My knowledge grows when admins teach me with .teach."
+  ]
+}

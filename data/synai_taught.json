@@ -1,0 +1,2251 @@
+{
+  "entries": {
+    "what is a banana": {
+      "q": "what is a banana",
+      "a": "A banana is a sweet edible fruit that grows in clusters on banana plants.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an apple": {
+      "q": "what is an apple",
+      "a": "An apple is a round fruit that grows on apple trees and comes in varieties with different colors and flavors.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a tomato": {
+      "q": "what is a tomato",
+      "a": "A tomato is an edible fruit that is commonly used as a vegetable in cooking.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a potato": {
+      "q": "what is a potato",
+      "a": "A potato is an edible underground tuber that is commonly used in many different dishes.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is rice": {
+      "q": "what is rice",
+      "a": "Rice is a cereal grain that is a major food source for billions of people around the world.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is bread": {
+      "q": "what is bread",
+      "a": "Bread is a food usually made by baking a mixture of flour and water, often with yeast.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is milk": {
+      "q": "what is milk",
+      "a": "Milk is a nutrient-rich liquid produced by mammals to feed their young and commonly consumed by humans.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is honey": {
+      "q": "what is honey",
+      "a": "Honey is a sweet substance produced by bees from flower nectar.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is sugar": {
+      "q": "what is sugar",
+      "a": "Sugar is a type of carbohydrate commonly used to sweeten food and drinks.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is salt": {
+      "q": "what is salt",
+      "a": "Salt is a mineral compound commonly used to season and preserve food.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is water": {
+      "q": "what is water",
+      "a": "Water is a chemical compound made of hydrogen and oxygen and is essential for life.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is coffee": {
+      "q": "what is coffee",
+      "a": "Coffee is a drink made by brewing roasted and ground coffee beans with water.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is tea": {
+      "q": "what is tea",
+      "a": "Tea is a drink usually made by steeping leaves or other plant material in hot water.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is chocolate": {
+      "q": "what is chocolate",
+      "a": "Chocolate is a food made primarily from processed cacao beans and is commonly sweetened with sugar.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is pizza": {
+      "q": "what is pizza",
+      "a": "Pizza is a dish consisting of a baked dough base commonly topped with sauce, cheese, and other ingredients.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is rice and beans": {
+      "q": "what is rice and beans",
+      "a": "Rice and beans is a dish combining cooked rice with beans and is a common meal in many cultures.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is halal": {
+      "q": "what is halal",
+      "a": "Halal is an Arabic term meaning permissible or lawful under Islamic rules.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is haram": {
+      "q": "what is haram",
+      "a": "Haram is an Arabic term used in Islam for something that is prohibited or forbidden.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is kosher": {
+      "q": "what is kosher",
+      "a": "Kosher refers to food and practices that conform to Jewish dietary laws.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is vegan": {
+      "q": "what is vegan",
+      "a": "Vegan generally describes a lifestyle or diet that avoids animal products.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is vegetarian": {
+      "q": "what is vegetarian",
+      "a": "Vegetarian generally describes someone whose diet does not include meat, though specific practices can vary.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is protein": {
+      "q": "what is protein",
+      "a": "Protein is a nutrient made of amino acids that the body uses to build and repair tissues and perform other functions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is vitamin": {
+      "q": "what is vitamin",
+      "a": "A vitamin is an organic nutrient that the body needs in small amounts for normal functioning.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a calorie": {
+      "q": "what is a calorie",
+      "a": "A calorie is a unit used to measure energy, especially the energy provided by food.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is fiber": {
+      "q": "what is fiber",
+      "a": "Fiber is a type of carbohydrate found mainly in plant foods that the human body does not fully digest.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people eat food": {
+      "q": "why do people eat food",
+      "a": "People eat food to obtain energy, nutrients, and materials needed for growth, repair, and normal body functions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people drink water": {
+      "q": "why do people drink water",
+      "a": "People drink water because the body needs it for processes such as temperature regulation, circulation, digestion, and cellular function.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why is the sky blue": {
+      "q": "why is the sky blue",
+      "a": "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more strongly than longer wavelengths.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why is the ocean blue": {
+      "q": "why is the ocean blue",
+      "a": "Large bodies of water often appear blue because water absorbs more of the red part of visible light and reflects or scatters more blue light.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why is grass green": {
+      "q": "why is grass green",
+      "a": "Grass is green because chlorophyll in its cells absorbs much of the red and blue light while reflecting green light.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do leaves change color": {
+      "q": "why do leaves change color",
+      "a": "Leaves change color when chlorophyll breaks down and other pigments become more visible, especially during seasonal changes.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why does it rain": {
+      "q": "why does it rain",
+      "a": "Rain occurs when water vapor in the atmosphere condenses into droplets that become heavy enough to fall to Earth.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is snow": {
+      "q": "what is snow",
+      "a": "Snow is precipitation made of ice crystals that form in cold clouds and fall to the ground.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is lightning": {
+      "q": "what is lightning",
+      "a": "Lightning is a powerful electrical discharge that occurs within clouds, between clouds, or between a cloud and the ground.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is thunder": {
+      "q": "what is thunder",
+      "a": "Thunder is the sound produced when lightning rapidly heats and expands the surrounding air.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a cloud": {
+      "q": "what is a cloud",
+      "a": "A cloud is a visible collection of tiny water droplets or ice crystals suspended in the atmosphere.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is wind": {
+      "q": "what is wind",
+      "a": "Wind is moving air caused by differences in atmospheric pressure.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a storm": {
+      "q": "what is a storm",
+      "a": "A storm is a disturbed atmospheric condition that can involve strong winds, rain, lightning, snow, or other severe weather.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a hurricane": {
+      "q": "what is a hurricane",
+      "a": "A hurricane is a powerful tropical cyclone that forms over warm ocean water and has sustained winds of at least 74 miles per hour.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a tornado": {
+      "q": "what is a tornado",
+      "a": "A tornado is a rapidly rotating column of air extending from a thunderstorm toward the ground.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an earthquake": {
+      "q": "what is an earthquake",
+      "a": "An earthquake is the shaking of the Earth's surface caused by the sudden release of energy within the Earth's crust.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a volcano": {
+      "q": "what is a volcano",
+      "a": "A volcano is an opening in Earth's crust through which molten rock, gases, and ash can reach the surface.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is lava": {
+      "q": "what is lava",
+      "a": "Lava is molten rock that has erupted onto Earth's surface.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is magma": {
+      "q": "what is magma",
+      "a": "Magma is molten or partially molten rock located beneath Earth's surface.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a tsunami": {
+      "q": "what is a tsunami",
+      "a": "A tsunami is a series of large ocean waves usually caused by underwater earthquakes, volcanic eruptions, landslides, or similar disturbances.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a rainbow": {
+      "q": "what is a rainbow",
+      "a": "A rainbow is an optical phenomenon produced when sunlight interacts with water droplets, separating light into different colors.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is gravity": {
+      "q": "what is gravity",
+      "a": "Gravity is the force of attraction between objects with mass.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is space": {
+      "q": "what is space",
+      "a": "Space is the vast region beyond Earth's atmosphere containing stars, planets, galaxies, and other objects.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a planet": {
+      "q": "what is a planet",
+      "a": "A planet is a large celestial body that orbits a star and is massive enough to have become approximately round under its own gravity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a star": {
+      "q": "what is a star",
+      "a": "A star is a massive, luminous ball of plasma held together by gravity and powered primarily by nuclear fusion.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the sun": {
+      "q": "what is the sun",
+      "a": "The Sun is the star at the center of our solar system and the main source of Earth's energy.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the moon": {
+      "q": "what is the moon",
+      "a": "The Moon is Earth's natural satellite and is the fifth-largest moon in the Solar System.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a galaxy": {
+      "q": "what is a galaxy",
+      "a": "A galaxy is a huge collection of stars, gas, dust, and dark matter held together by gravity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the milky way": {
+      "q": "what is the milky way",
+      "a": "The Milky Way is the galaxy that contains our Solar System.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a black hole": {
+      "q": "what is a black hole",
+      "a": "A black hole is a region of spacetime with gravity so strong that nothing, including light, can escape from inside its event horizon.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an asteroid": {
+      "q": "what is an asteroid",
+      "a": "An asteroid is a rocky or metallic object that orbits the Sun.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a comet": {
+      "q": "what is a comet",
+      "a": "A comet is a small Solar System body made largely of ice, dust, and rock that can develop a visible tail when it approaches the Sun.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a meteor": {
+      "q": "what is a meteor",
+      "a": "A meteor is the streak of light produced when a space rock enters Earth's atmosphere and heats up.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a meteorite": {
+      "q": "what is a meteorite",
+      "a": "A meteorite is a piece of space rock that survives passage through the atmosphere and reaches Earth's surface.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the solar system": {
+      "q": "what is the solar system",
+      "a": "The Solar System is the system centered on the Sun that includes planets, moons, asteroids, comets, and other objects.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "how many planets are in the solar system": {
+      "q": "how many planets are in the solar system",
+      "a": "There are eight officially recognized planets in the Solar System.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is mercury": {
+      "q": "what is mercury",
+      "a": "Mercury is the smallest planet in the Solar System and the closest planet to the Sun.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is venus": {
+      "q": "what is venus",
+      "a": "Venus is the second planet from the Sun and has a thick atmosphere dominated by carbon dioxide.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is earth": {
+      "q": "what is earth",
+      "a": "Earth is the third planet from the Sun and the only planet currently known to support life.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is mars": {
+      "q": "what is mars",
+      "a": "Mars is the fourth planet from the Sun and is often called the Red Planet because of its reddish appearance.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is jupiter": {
+      "q": "what is jupiter",
+      "a": "Jupiter is the largest planet in the Solar System and is a gas giant.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is saturn": {
+      "q": "what is saturn",
+      "a": "Saturn is a gas giant famous for its prominent system of rings.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is uranus": {
+      "q": "what is uranus",
+      "a": "Uranus is an ice giant with a highly tilted rotation axis and a blue-green appearance caused partly by methane in its atmosphere.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is neptune": {
+      "q": "what is neptune",
+      "a": "Neptune is the eighth and farthest recognized planet from the Sun.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was albert einstein": {
+      "q": "who was albert einstein",
+      "a": "Albert Einstein was a German-born physicist best known for his theories of relativity and contributions to modern physics.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was isaac newton": {
+      "q": "who was isaac newton",
+      "a": "Isaac Newton was an English mathematician and physicist known for his laws of motion and theory of gravity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was nikola tesla": {
+      "q": "who was nikola tesla",
+      "a": "Nikola Tesla was an inventor and electrical engineer known for major contributions to alternating-current electrical systems.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was marie curie": {
+      "q": "who was marie curie",
+      "a": "Marie Curie was a physicist and chemist known for pioneering research on radioactivity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was leonardo da vinci": {
+      "q": "who was leonardo da vinci",
+      "a": "Leonardo da Vinci was an Italian Renaissance artist, inventor, engineer, and scientist.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was william shakespeare": {
+      "q": "who was william shakespeare",
+      "a": "William Shakespeare was an English playwright and poet whose works include Hamlet, Macbeth, and Romeo and Juliet.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was nelson mandela": {
+      "q": "who was nelson mandela",
+      "a": "Nelson Mandela was a South African anti-apartheid leader who became the country's first Black president in 1994.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was martin luther king jr": {
+      "q": "who was martin luther king jr",
+      "a": "Martin Luther King Jr. was an American civil rights leader known for his advocacy of racial equality and nonviolent protest.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was mahatma gandhi": {
+      "q": "who was mahatma gandhi",
+      "a": "Mahatma Gandhi was an Indian independence leader known for promoting nonviolent resistance against British rule.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was julius caesar": {
+      "q": "who was julius caesar",
+      "a": "Julius Caesar was a Roman military commander and politician who played a major role in the transformation of the Roman Republic.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was cleopatra": {
+      "q": "who was cleopatra",
+      "a": "Cleopatra VII was the last active ruler of the Ptolemaic Kingdom of Egypt.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was alexander the great": {
+      "q": "who was alexander the great",
+      "a": "Alexander the Great was a Macedonian king and military commander who created one of the largest empires of the ancient world.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was christopher columbus": {
+      "q": "who was christopher columbus",
+      "a": "Christopher Columbus was a European navigator whose 1492 voyage across the Atlantic reached the Caribbean.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was abraham lincoln": {
+      "q": "who was abraham lincoln",
+      "a": "Abraham Lincoln was the 16th president of the United States and led the country during the American Civil War.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was george washington": {
+      "q": "who was george washington",
+      "a": "George Washington was the first president of the United States and a major leader during the American Revolutionary War.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who was steve jobs": {
+      "q": "who was steve jobs",
+      "a": "Steve Jobs was an American entrepreneur and co-founder of Apple who played a major role in the development of products such as the Macintosh, iPod, iPhone, and iPad.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is elon musk": {
+      "q": "who is elon musk",
+      "a": "Elon Musk is a businessman associated with companies including SpaceX, Tesla, Neuralink, and xAI.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is bill gates": {
+      "q": "who is bill gates",
+      "a": "Bill Gates is an American technology entrepreneur and philanthropist who co-founded Microsoft.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is mark zuckerberg": {
+      "q": "who is mark zuckerberg",
+      "a": "Mark Zuckerberg is an American technology entrepreneur and co-founder of Facebook, now part of Meta.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is jeff bezos": {
+      "q": "who is jeff bezos",
+      "a": "Jeff Bezos is an American entrepreneur who founded Amazon and later founded the space company Blue Origin.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is aliko dangote": {
+      "q": "who is aliko dangote",
+      "a": "Aliko Dangote is a Nigerian businessman and founder of the Dangote Group.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is cristiano ronaldo": {
+      "q": "who is cristiano ronaldo",
+      "a": "Cristiano Ronaldo is a Portuguese professional footballer widely known for his career with clubs including Sporting CP, Manchester United, Real Madrid, and Juventus.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is lionel messi": {
+      "q": "who is lionel messi",
+      "a": "Lionel Messi is an Argentine footballer widely regarded as one of the most accomplished players in football history.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is michael jackson": {
+      "q": "who is michael jackson",
+      "a": "Michael Jackson was an American singer, songwriter, and dancer who became one of the most commercially successful entertainers in music history.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is bob marley": {
+      "q": "who is bob marley",
+      "a": "Bob Marley was a Jamaican singer and songwriter who became one of the most internationally recognized figures in reggae music.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is drake": {
+      "q": "who is drake",
+      "a": "Drake is a Canadian rapper, singer, songwriter, and actor known for numerous commercially successful songs and albums.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is beyoncé": {
+      "q": "who is beyoncé",
+      "a": "Beyoncé is an American singer, songwriter, performer, and businesswoman who rose to fame as a member of Destiny's Child before pursuing a solo career.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is taylor swift": {
+      "q": "who is taylor swift",
+      "a": "Taylor Swift is an American singer-songwriter known for her narrative songwriting and highly successful music career.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is burna boy": {
+      "q": "who is burna boy",
+      "a": "Burna Boy is a Nigerian singer and songwriter known for his Afrobeats and other musical influences.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is wizkid": {
+      "q": "who is wizkid",
+      "a": "Wizkid is a Nigerian singer and songwriter who became internationally recognized for his Afrobeats music and collaborations.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is davido": {
+      "q": "who is davido",
+      "a": "Davido is a Nigerian-American singer, songwriter, and record producer known for his Afrobeats music.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "who is mrbeast": {
+      "q": "who is mrbeast",
+      "a": "MrBeast is the online name of Jimmy Donaldson, an American YouTube creator known for large-scale videos, challenges, and philanthropic projects.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is nigeria": {
+      "q": "what is nigeria",
+      "a": "Nigeria is a country in West Africa and one of the most populous countries in Africa.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is lagos": {
+      "q": "what is lagos",
+      "a": "Lagos is a major city in Nigeria and an important center for business, entertainment, and culture.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is abuja": {
+      "q": "what is abuja",
+      "a": "Abuja is the capital city of Nigeria.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is africa": {
+      "q": "what is africa",
+      "a": "Africa is the world's second-largest and second-most-populous continent.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is europe": {
+      "q": "what is europe",
+      "a": "Europe is a continent located primarily in the Northern Hemisphere and traditionally considered part of the larger Eurasian landmass.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is asia": {
+      "q": "what is asia",
+      "a": "Asia is the largest continent by both area and population.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is america": {
+      "q": "what is america",
+      "a": "America can refer to the United States in common usage, or to the broader regions of North and South America depending on context.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the united states": {
+      "q": "what is the united states",
+      "a": "The United States is a country in North America made up of 50 states and several other territories.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the united kingdom": {
+      "q": "what is the united kingdom",
+      "a": "The United Kingdom is a country consisting of England, Scotland, Wales, and Northern Ireland.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is london": {
+      "q": "what is london",
+      "a": "London is the capital and largest city of the United Kingdom.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is new york": {
+      "q": "what is new york",
+      "a": "New York can refer to a U.S. state or, commonly, New York City, one of the largest cities in the United States.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is japan": {
+      "q": "what is japan",
+      "a": "Japan is an island country in East Asia known for its technology, culture, history, and distinctive cuisine.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is china": {
+      "q": "what is china",
+      "a": "China is a country in East Asia and one of the world's largest countries by population and economy.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is india": {
+      "q": "what is india",
+      "a": "India is a country in South Asia and one of the world's most populous countries.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is brazil": {
+      "q": "what is brazil",
+      "a": "Brazil is the largest country in South America by both area and population.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is canada": {
+      "q": "what is canada",
+      "a": "Canada is a country in North America and the second-largest country in the world by total area.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is australia": {
+      "q": "what is australia",
+      "a": "Australia is both a country and a continent located in the Southern Hemisphere.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is egypt": {
+      "q": "what is egypt",
+      "a": "Egypt is a country in North Africa known for its ancient civilization and monuments such as the pyramids.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is dubai": {
+      "q": "what is dubai",
+      "a": "Dubai is a city and emirate in the United Arab Emirates known for its modern architecture, tourism, and business activity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is islam": {
+      "q": "what is islam",
+      "a": "Islam is a monotheistic religion based on the belief in one God and the teachings of the Prophet Muhammad.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is christianity": {
+      "q": "what is christianity",
+      "a": "Christianity is a monotheistic religion centered on the life, teachings, death, and resurrection of Jesus Christ.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is judaism": {
+      "q": "what is judaism",
+      "a": "Judaism is an ancient monotheistic religion and tradition centered on the covenant between God and the Jewish people.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is buddhism": {
+      "q": "what is buddhism",
+      "a": "Buddhism is a religious and philosophical tradition based on teachings associated with Siddhartha Gautama, known as the Buddha.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is hinduism": {
+      "q": "what is hinduism",
+      "a": "Hinduism is a diverse family of religious and philosophical traditions originating in South Asia.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is atheism": {
+      "q": "what is atheism",
+      "a": "Atheism generally refers to the absence of belief in the existence of gods.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is ramadan": {
+      "q": "what is ramadan",
+      "a": "Ramadan is the ninth month of the Islamic lunar calendar and a month in which Muslims traditionally fast from dawn until sunset.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is eid": {
+      "q": "what is eid",
+      "a": "Eid refers to Islamic religious festivals, particularly Eid al-Fitr and Eid al-Adha.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is christmas": {
+      "q": "what is christmas",
+      "a": "Christmas is a Christian holiday commemorating the birth of Jesus Christ and is also widely celebrated culturally around the world.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is easter": {
+      "q": "what is easter",
+      "a": "Easter is a Christian festival commemorating the resurrection of Jesus Christ.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the bible": {
+      "q": "what is the bible",
+      "a": "The Bible is a collection of sacred texts that form the central scripture of Christianity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the quran": {
+      "q": "what is the quran",
+      "a": "The Quran is the central religious scripture of Islam, believed by Muslims to be the word of God revealed to Muhammad.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is prayer": {
+      "q": "what is prayer",
+      "a": "Prayer is communication or communion with a deity or higher power and is practiced in many religions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a mosque": {
+      "q": "what is a mosque",
+      "a": "A mosque is a place of worship for Muslims.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a church": {
+      "q": "what is a church",
+      "a": "A church can refer to a Christian place of worship or to a Christian religious community.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a synagogue": {
+      "q": "what is a synagogue",
+      "a": "A synagogue is a place of worship and community for Jewish people.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a temple": {
+      "q": "what is a temple",
+      "a": "A temple is a building or place used for religious worship, with its meaning varying among religions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is love": {
+      "q": "what is love",
+      "a": "Love is a strong feeling of affection, attachment, care, or emotional connection toward another person, animal, activity, or thing.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is friendship": {
+      "q": "what is friendship",
+      "a": "Friendship is a voluntary relationship involving mutual affection, trust, companionship, and support.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is trust": {
+      "q": "what is trust",
+      "a": "Trust is confidence that someone or something is reliable, honest, safe, or dependable.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is respect": {
+      "q": "what is respect",
+      "a": "Respect is recognition of another person's value, rights, abilities, or dignity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is happiness": {
+      "q": "what is happiness",
+      "a": "Happiness is a positive emotional state commonly associated with pleasure, satisfaction, or well-being.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is sadness": {
+      "q": "what is sadness",
+      "a": "Sadness is an emotional state commonly associated with loss, disappointment, loneliness, or difficult experiences.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is anger": {
+      "q": "what is anger",
+      "a": "Anger is an emotional response commonly triggered by perceived wrongdoing, frustration, threats, or unfairness.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is fear": {
+      "q": "what is fear",
+      "a": "Fear is an emotional response to perceived danger, threat, or uncertainty.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is anxiety": {
+      "q": "what is anxiety",
+      "a": "Anxiety is a feeling of worry, nervousness, or unease, often concerning uncertain future events.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is stress": {
+      "q": "what is stress",
+      "a": "Stress is the body's and mind's response to challenging, demanding, or threatening circumstances.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is confidence": {
+      "q": "what is confidence",
+      "a": "Confidence is a belief in one's own abilities, qualities, or judgment.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is motivation": {
+      "q": "what is motivation",
+      "a": "Motivation is the set of reasons or forces that encourage someone to take action toward a goal.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is discipline": {
+      "q": "what is discipline",
+      "a": "Discipline is the ability to consistently follow rules, habits, or plans, especially when doing so requires effort.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is success": {
+      "q": "what is success",
+      "a": "Success generally means achieving a desired goal or producing a desired result.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is failure": {
+      "q": "what is failure",
+      "a": "Failure is the inability to achieve a particular goal or desired result.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is luck": {
+      "q": "what is luck",
+      "a": "Luck refers to events or outcomes that appear to occur by chance rather than through deliberate control.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is karma": {
+      "q": "what is karma",
+      "a": "Karma is a concept found in several Indian religions involving the relationship between actions and their consequences.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is destiny": {
+      "q": "what is destiny",
+      "a": "Destiny is the idea that events in a person's life are determined by forces beyond their control.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a dream": {
+      "q": "what is a dream",
+      "a": "A dream is a sequence of thoughts, images, emotions, or sensations experienced during sleep.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people dream": {
+      "q": "why do people dream",
+      "a": "Scientists have several theories about dreaming, including connections to memory processing, emotional regulation, and brain activity during sleep.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people sleep": {
+      "q": "why do people sleep",
+      "a": "Sleep supports important processes involving the brain, memory, metabolism, immune function, and physical recovery.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is insomnia": {
+      "q": "what is insomnia",
+      "a": "Insomnia is a sleep disorder involving persistent difficulty falling asleep, staying asleep, or getting adequate restorative sleep.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a nightmare": {
+      "q": "what is a nightmare",
+      "a": "A nightmare is a disturbing or frightening dream that can cause strong negative emotions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is memory": {
+      "q": "what is memory",
+      "a": "Memory is the ability of the brain to encode, store, and retrieve information.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is intelligence": {
+      "q": "what is intelligence",
+      "a": "Intelligence generally refers to the ability to learn, reason, solve problems, and adapt to new situations.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is creativity": {
+      "q": "what is creativity",
+      "a": "Creativity is the ability to produce new ideas, approaches, or works that are meaningful or useful.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is knowledge": {
+      "q": "what is knowledge",
+      "a": "Knowledge is information and understanding gained through learning, experience, observation, or study.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is education": {
+      "q": "what is education",
+      "a": "Education is the process of gaining knowledge, skills, values, and understanding through learning.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is school": {
+      "q": "what is school",
+      "a": "A school is an institution where people receive organized education and instruction.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is university": {
+      "q": "what is university",
+      "a": "A university is an institution of higher education that provides academic programs and often conducts research.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is mathematics": {
+      "q": "what is mathematics",
+      "a": "Mathematics is the study of numbers, quantities, structures, patterns, space, and logical relationships.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is algebra": {
+      "q": "what is algebra",
+      "a": "Algebra is a branch of mathematics that uses symbols and rules to represent and solve mathematical relationships.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is geometry": {
+      "q": "what is geometry",
+      "a": "Geometry is the branch of mathematics concerned with shapes, sizes, positions, distances, and properties of space.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is physics": {
+      "q": "what is physics",
+      "a": "Physics is the science that studies matter, energy, motion, forces, space, and time.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is chemistry": {
+      "q": "what is chemistry",
+      "a": "Chemistry is the science that studies matter, its properties, composition, and transformations.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is biology": {
+      "q": "what is biology",
+      "a": "Biology is the scientific study of living organisms and life processes.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is psychology": {
+      "q": "what is psychology",
+      "a": "Psychology is the scientific study of behavior and mental processes.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is philosophy": {
+      "q": "what is philosophy",
+      "a": "Philosophy is the study of fundamental questions about existence, knowledge, reasoning, morality, and reality.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is history": {
+      "q": "what is history",
+      "a": "History is the study of past events and the people, societies, and forces involved in them.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is geography": {
+      "q": "what is geography",
+      "a": "Geography is the study of Earth's places, environments, landscapes, and relationships between people and their surroundings.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is science": {
+      "q": "what is science",
+      "a": "Science is a systematic way of studying the natural world through observation, testing, evidence, and reasoning.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an experiment": {
+      "q": "what is an experiment",
+      "a": "An experiment is a controlled investigation designed to test an idea or determine how something works.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a hypothesis": {
+      "q": "what is a hypothesis",
+      "a": "A hypothesis is a proposed explanation or prediction that can be tested through investigation.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is evidence": {
+      "q": "what is evidence",
+      "a": "Evidence is information or observations used to support or evaluate a claim.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is artificial intelligence": {
+      "q": "what is artificial intelligence",
+      "a": "Artificial intelligence is technology that enables computer systems to perform tasks that typically require human-like abilities such as reasoning, learning, perception, or language processing.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is chatgpt": {
+      "q": "what is chatgpt",
+      "a": "ChatGPT is an AI assistant developed by OpenAI that can generate and analyze text and perform various language-based tasks.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is openai": {
+      "q": "what is openai",
+      "a": "OpenAI is an artificial intelligence research and technology company that develops AI systems and products.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is google": {
+      "q": "what is google",
+      "a": "Google is a technology company best known for its search engine and products such as Android, YouTube, Google Maps, and Google Cloud.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is microsoft": {
+      "q": "what is microsoft",
+      "a": "Microsoft is a technology company known for products and services including Windows, Microsoft 365, Azure, and Xbox.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is apple": {
+      "q": "what is apple",
+      "a": "Apple is a technology company known for products including the iPhone, iPad, Mac, Apple Watch, and various software services.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is android": {
+      "q": "what is android",
+      "a": "Android is a mobile operating system developed by Google and used by many smartphone and tablet manufacturers.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an iphone": {
+      "q": "what is an iphone",
+      "a": "An iPhone is a smartphone product made by Apple.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a computer": {
+      "q": "what is a computer",
+      "a": "A computer is an electronic device that processes information according to programmed instructions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a laptop": {
+      "q": "what is a laptop",
+      "a": "A laptop is a portable computer designed to be used while being carried or placed on a surface.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a smartphone": {
+      "q": "what is a smartphone",
+      "a": "A smartphone is a mobile phone with advanced computing, internet, communication, and application capabilities.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the internet": {
+      "q": "what is the internet",
+      "a": "The internet is a worldwide network of interconnected computer networks that communicate using standardized protocols.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is wi-fi": {
+      "q": "what is wi-fi",
+      "a": "Wi-Fi is a wireless networking technology that allows compatible devices to connect to a network using radio signals.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is bluetooth": {
+      "q": "what is bluetooth",
+      "a": "Bluetooth is a short-range wireless technology used to connect devices and exchange data.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a website": {
+      "q": "what is a website",
+      "a": "A website is a collection of related web pages and resources accessible through the internet.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an app": {
+      "q": "what is an app",
+      "a": "An app is a software application designed to perform specific functions on a computer or mobile device.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is software": {
+      "q": "what is software",
+      "a": "Software is a collection of programs and instructions that tell a computer how to perform tasks.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is hardware": {
+      "q": "what is hardware",
+      "a": "Hardware refers to the physical components of a computer or electronic device.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a cpu": {
+      "q": "what is a cpu",
+      "a": "A CPU, or central processing unit, is the primary processor that executes instructions and performs calculations in a computer.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is ram": {
+      "q": "what is ram",
+      "a": "RAM is temporary computer memory used to store data and instructions that programs are actively using.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an ssd": {
+      "q": "what is an ssd",
+      "a": "An SSD is a solid-state storage device that stores data using flash memory.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a hard drive": {
+      "q": "what is a hard drive",
+      "a": "A hard drive is a storage device that traditionally stores data using magnetic disks.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a gpu": {
+      "q": "what is a gpu",
+      "a": "A GPU is a processor specialized for performing large numbers of calculations in parallel, especially those used for graphics and AI workloads.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is coding": {
+      "q": "what is coding",
+      "a": "Coding is the process of writing instructions that computers can execute.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is programming": {
+      "q": "what is programming",
+      "a": "Programming is the process of designing and creating computer programs.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is javascript": {
+      "q": "what is javascript",
+      "a": "JavaScript is a programming language widely used to create interactive websites and applications.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is python": {
+      "q": "what is python",
+      "a": "Python is a general-purpose programming language known for readable syntax and broad use in web development, automation, data science, and AI.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is html": {
+      "q": "what is html",
+      "a": "HTML is the standard markup language used to structure content on web pages.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is css": {
+      "q": "what is css",
+      "a": "CSS is a language used to control the appearance and layout of web pages.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is sql": {
+      "q": "what is sql",
+      "a": "SQL is a language used to manage and query data stored in relational databases.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a database": {
+      "q": "what is a database",
+      "a": "A database is an organized collection of data that can be stored, searched, updated, and managed electronically.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an api": {
+      "q": "what is an api",
+      "a": "An API is a set of rules and interfaces that allows different software systems to communicate with each other.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a server": {
+      "q": "what is a server",
+      "a": "A server is a computer or software system that provides data, services, or resources to other devices or programs.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a browser": {
+      "q": "what is a browser",
+      "a": "A web browser is software used to access and interact with websites on the internet.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is google chrome": {
+      "q": "what is google chrome",
+      "a": "Google Chrome is a web browser developed by Google.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is firefox": {
+      "q": "what is firefox",
+      "a": "Firefox is a web browser developed by Mozilla.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is microsoft edge": {
+      "q": "what is microsoft edge",
+      "a": "Microsoft Edge is a web browser developed by Microsoft.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a url": {
+      "q": "what is a url",
+      "a": "A URL is a web address that identifies where a resource can be found on the internet.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a password": {
+      "q": "what is a password",
+      "a": "A password is a secret sequence of characters used to authenticate or protect access to an account or system.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is two-factor authentication": {
+      "q": "what is two-factor authentication",
+      "a": "Two-factor authentication is a security method requiring two different forms of verification to access an account.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a virus": {
+      "q": "what is a virus",
+      "a": "A virus is a microscopic infectious agent that reproduces by entering and using the machinery of host cells.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is malware": {
+      "q": "what is malware",
+      "a": "Malware is software designed to harm, disrupt, spy on, or gain unauthorized access to computers or systems.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a hacker": {
+      "q": "what is a hacker",
+      "a": "A hacker is someone who uses technical knowledge to interact with computer systems, with activities ranging from legitimate security research to unauthorized access.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is cybersecurity": {
+      "q": "what is cybersecurity",
+      "a": "Cybersecurity is the practice of protecting computers, networks, applications, and data from unauthorized access and digital threats.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is phishing": {
+      "q": "what is phishing",
+      "a": "Phishing is a scam technique that uses deceptive messages or websites to trick people into revealing information or taking unsafe actions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is spam": {
+      "q": "what is spam",
+      "a": "Spam is unwanted or unsolicited messages, commonly sent in large quantities.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a scam": {
+      "q": "what is a scam",
+      "a": "A scam is a dishonest scheme designed to trick someone into giving away money, information, or something else of value.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is identity theft": {
+      "q": "what is identity theft",
+      "a": "Identity theft is the unauthorized use of another person's personal information, often for financial or fraudulent purposes.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is privacy": {
+      "q": "what is privacy",
+      "a": "Privacy is the ability to control access to personal information, activities, communications, or other aspects of one's life.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is encryption": {
+      "q": "what is encryption",
+      "a": "Encryption is the process of converting information into a form that is difficult to understand without the appropriate key or method of decryption.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a vpn": {
+      "q": "what is a vpn",
+      "a": "A VPN, or virtual private network, creates an encrypted connection between a device and a VPN server, helping protect network traffic from certain forms of interception.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is social media": {
+      "q": "what is social media",
+      "a": "Social media refers to online platforms where people create, share, and interact with content and with one another.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is instagram": {
+      "q": "what is instagram",
+      "a": "Instagram is a social media platform focused primarily on photos, videos, stories, and messaging.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is facebook": {
+      "q": "what is facebook",
+      "a": "Facebook is a social networking platform operated by Meta.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is tiktok": {
+      "q": "what is tiktok",
+      "a": "TikTok is a social media platform centered around short-form videos.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is youtube": {
+      "q": "what is youtube",
+      "a": "YouTube is an online video platform where users can watch, upload, share, and interact with videos.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is whatsapp": {
+      "q": "what is whatsapp",
+      "a": "WhatsApp is a messaging platform used for text messages, voice calls, video calls, group chats, and media sharing.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is telegram": {
+      "q": "what is telegram",
+      "a": "Telegram is a messaging application that supports individual chats, group conversations, channels, media sharing, and bots.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is discord": {
+      "q": "what is discord",
+      "a": "Discord is a communication platform built around text channels, voice channels, video, communities, and direct messaging.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a meme": {
+      "q": "what is a meme",
+      "a": "A meme is an idea, image, video, phrase, or format that spreads widely through imitation and modification, especially online.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does lol mean": {
+      "q": "what does lol mean",
+      "a": "LOL is an abbreviation for \"laughing out loud\" and is commonly used online to indicate amusement.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does lmao mean": {
+      "q": "what does lmao mean",
+      "a": "LMAO is an informal abbreviation for \"laughing my ass off\" used to express strong amusement.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does brb mean": {
+      "q": "what does brb mean",
+      "a": "BRB means \"be right back\" and is used when someone temporarily leaves a conversation.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does btw mean": {
+      "q": "what does btw mean",
+      "a": "BTW means \"by the way.\"",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does imo mean": {
+      "q": "what does imo mean",
+      "a": "IMO means \"in my opinion.\"",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does idk mean": {
+      "q": "what does idk mean",
+      "a": "IDK means \"I don't know.\"",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what does wtf mean": {
+      "q": "what does wtf mean",
+      "a": "WTF is an informal abbreviation commonly used to express surprise, confusion, or disbelief.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is anime": {
+      "q": "what is anime",
+      "a": "Anime is a term commonly used for Japanese animated productions and the distinctive style associated with many of them.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is manga": {
+      "q": "what is manga",
+      "a": "Manga refers to Japanese comics and graphic novels.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is manhwa": {
+      "q": "what is manhwa",
+      "a": "Manhwa refers to Korean comics and graphic novels.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a cartoon": {
+      "q": "what is a cartoon",
+      "a": "A cartoon is an illustrated or animated work, often created for entertainment, education, or humor.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a movie": {
+      "q": "what is a movie",
+      "a": "A movie is a recorded visual work that tells a story, presents information, or provides entertainment through moving images and sound.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a tv series": {
+      "q": "what is a tv series",
+      "a": "A TV series is a collection of related episodes released as part of an ongoing program or story.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a documentary": {
+      "q": "what is a documentary",
+      "a": "A documentary is a nonfiction film or program intended to present information about real people, events, places, or subjects.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is music": {
+      "q": "what is music",
+      "a": "Music is an organized form of sound involving elements such as rhythm, melody, harmony, and dynamics.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a song": {
+      "q": "what is a song",
+      "a": "A song is a musical composition, usually involving vocals and lyrics, although instrumental songs also exist.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a singer": {
+      "q": "what is a singer",
+      "a": "A singer is a person who uses their voice to perform musical sounds or songs.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a rapper": {
+      "q": "what is a rapper",
+      "a": "A rapper is a performer who delivers rhythmic vocal lyrics, often over a musical beat.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is football": {
+      "q": "what is football",
+      "a": "Football is a family of sports played by teams using a ball, with rules varying by the specific version of the sport.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is soccer": {
+      "q": "what is soccer",
+      "a": "Soccer is a team sport in which players attempt to score by getting a ball into the opposing team's goal, primarily using their feet.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is basketball": {
+      "q": "what is basketball",
+      "a": "Basketball is a team sport in which players attempt to score by putting a ball through a raised hoop.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is tennis": {
+      "q": "what is tennis",
+      "a": "Tennis is a racket sport in which players hit a ball over a net into an opponent's court.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is boxing": {
+      "q": "what is boxing",
+      "a": "Boxing is a combat sport in which opponents use gloved punches under a defined set of rules.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is wrestling": {
+      "q": "what is wrestling",
+      "a": "Wrestling is a combat sport involving grappling, takedowns, holds, and attempts to control an opponent.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the olympics": {
+      "q": "what is the olympics",
+      "a": "The Olympic Games are major international sporting events featuring athletes from countries around the world.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the premier league": {
+      "q": "what is the premier league",
+      "a": "The Premier League is the top level of English men's professional football.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the world cup": {
+      "q": "what is the world cup",
+      "a": "The FIFA World Cup is an international football tournament in which national teams compete for the world championship.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is health": {
+      "q": "what is health",
+      "a": "Health is a state involving physical, mental, and social well-being rather than simply the absence of disease.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is exercise": {
+      "q": "what is exercise",
+      "a": "Exercise is physical activity performed to improve or maintain fitness, strength, endurance, or health.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is running": {
+      "q": "what is running",
+      "a": "Running is a form of locomotion in which a person moves quickly while periodically having both feet off the ground.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a gym": {
+      "q": "what is a gym",
+      "a": "A gym is a facility equipped for physical exercise and fitness training.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is muscle": {
+      "q": "what is muscle",
+      "a": "Muscle is body tissue capable of contracting to produce movement and perform other physical functions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the brain": {
+      "q": "what is the brain",
+      "a": "The brain is the central organ of the nervous system and controls or coordinates many bodily and mental functions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is the heart": {
+      "q": "what is the heart",
+      "a": "The heart is a muscular organ that pumps blood throughout the body.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is blood": {
+      "q": "what is blood",
+      "a": "Blood is a fluid tissue that transports oxygen, nutrients, hormones, waste products, and immune cells throughout the body.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is dna": {
+      "q": "what is dna",
+      "a": "DNA is the molecule that stores the genetic instructions used in the development and functioning of living organisms.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a cell": {
+      "q": "what is a cell",
+      "a": "A cell is the basic structural and functional unit of living organisms.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is bacteria": {
+      "q": "what is bacteria",
+      "a": "Bacteria are microscopic single-celled organisms found in nearly every environment, including the human body.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a vaccine": {
+      "q": "what is a vaccine",
+      "a": "A vaccine trains the immune system to recognize and respond to a specific infectious agent or its components.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a disease": {
+      "q": "what is a disease",
+      "a": "A disease is a condition that negatively affects normal structure or function of the body or mind.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a fever": {
+      "q": "what is a fever",
+      "a": "A fever is an elevated body temperature that commonly occurs as part of the body's response to infection or illness.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a headache": {
+      "q": "what is a headache",
+      "a": "A headache is pain or discomfort occurring in the head, scalp, or upper neck.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a cold": {
+      "q": "what is a cold",
+      "a": "The common cold is a viral infection that commonly causes symptoms such as a runny nose, congestion, sneezing, and sore throat.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is diabetes": {
+      "q": "what is diabetes",
+      "a": "Diabetes is a group of conditions in which blood glucose levels become abnormally high because of problems involving insulin production or action.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is cancer": {
+      "q": "what is cancer",
+      "a": "Cancer is a group of diseases characterized by abnormal cells growing and dividing uncontrollably and potentially spreading to other parts of the body.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is blood pressure": {
+      "q": "what is blood pressure",
+      "a": "Blood pressure is the force of circulating blood against the walls of blood vessels.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a doctor": {
+      "q": "what is a doctor",
+      "a": "A doctor is a medical professional trained to diagnose, treat, and manage health conditions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a nurse": {
+      "q": "what is a nurse",
+      "a": "A nurse is a healthcare professional who provides patient care, monitors health conditions, and supports treatment and recovery.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a hospital": {
+      "q": "what is a hospital",
+      "a": "A hospital is a healthcare facility that provides medical treatment, diagnosis, surgery, emergency care, and other services.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a medicine": {
+      "q": "what is a medicine",
+      "a": "Medicine is a substance or treatment used to prevent, diagnose, relieve, or treat a health condition.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is an antibiotic": {
+      "q": "what is an antibiotic",
+      "a": "An antibiotic is a medicine used to treat infections caused by bacteria.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a painkiller": {
+      "q": "what is a painkiller",
+      "a": "A painkiller is a medicine used to reduce or relieve pain.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is sleep paralysis": {
+      "q": "what is sleep paralysis",
+      "a": "Sleep paralysis is a temporary state in which a person is conscious but unable to move or speak while falling asleep or waking up.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people sneeze": {
+      "q": "why do people sneeze",
+      "a": "People sneeze when irritation in the nose triggers a reflex that forcefully expels air through the nose and mouth.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people yawn": {
+      "q": "why do people yawn",
+      "a": "Yawning is a common reflex involving a deep inhalation and stretching of the mouth and jaw, although its exact biological purpose is not completely understood.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people get hiccups": {
+      "q": "why do people get hiccups",
+      "a": "Hiccups occur when the diaphragm suddenly contracts involuntarily, followed by rapid closure of the vocal cords.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do people sweat": {
+      "q": "why do people sweat",
+      "a": "People sweat primarily to help regulate body temperature by allowing heat to be lost as sweat evaporates from the skin.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why does the heart beat": {
+      "q": "why does the heart beat",
+      "a": "The heart beats to pump blood throughout the body, delivering oxygen and nutrients and carrying away waste products.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do we have fingerprints": {
+      "q": "why do we have fingerprints",
+      "a": "Fingerprints are patterns of ridges on the fingers that develop before birth and help improve grip and touch sensitivity.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why is blood red": {
+      "q": "why is blood red",
+      "a": "Blood is red because red blood cells contain hemoglobin, a protein containing iron that gives blood its characteristic color.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do humans have eyebrows": {
+      "q": "why do humans have eyebrows",
+      "a": "Eyebrows help channel sweat and water away from the eyes and also contribute to facial expressions and communication.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "why do humans have eyelashes": {
+      "q": "why do humans have eyelashes",
+      "a": "Eyelashes help protect the eyes by detecting and reducing contact with dust, debris, and other particles.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is evolution": {
+      "q": "what is evolution",
+      "a": "Evolution is the change in inherited characteristics of populations across generations.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is natural selection": {
+      "q": "what is natural selection",
+      "a": "Natural selection is a process in which inherited traits that improve survival or reproduction can become more common in a population over generations.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is extinction": {
+      "q": "what is extinction",
+      "a": "Extinction occurs when no living individuals of a species remain.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a dinosaur": {
+      "q": "what is a dinosaur",
+      "a": "Dinosaurs were a diverse group of reptiles that lived for millions of years before most became extinct about 66 million years ago.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a fossil": {
+      "q": "what is a fossil",
+      "a": "A fossil is preserved evidence of ancient life, such as bones, shells, footprints, or impressions.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "what is a mammal": {
+      "q": "what is a mammal",
+      "a": "A mammal is a warm-blooded vertebrate animal characterized by features including hair or fur and the production of milk by females to feed their young.",
+      "taughtBy": "bulk-import",
+      "taughtAt": 1789583393319,
+      "hits": 0
+    },
+    "how do i add players to my guild": {
+      "q": "how do i add players to my guild",
+      "a": "Use `.guild invite @user`. They must accept with `.guild accept`. You need to be the guild leader or an officer, and the guild must have free member slots (upgrade HQ to raise the cap).",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how do i invite to guild": {
+      "q": "how do i invite to guild",
+      "a": "Type `.guild invite @user`. The invited player accepts with `.guild accept`. Invites expire after 24 hours.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how does guild work": {
+      "q": "how does guild work",
+      "a": "Create one with `.guild create <name>`. Invite members, upgrade HQ for higher member cap, claim territory, and fight other guilds. Check `.guild` for status.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "what is heat": {
+      "q": "what is heat",
+      "a": "Heat is the city-wide danger level. Higher heat makes crimes harder and more profitable, and increases wanted gain. It decays over time. Check `.city`.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how do i get out of jail": {
+      "q": "how do i get out of jail",
+      "a": "Pay bail with `.bail` or try `.escape`. Higher stealth improves escape odds. Being in prison blocks most crime commands.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "what is hospital": {
+      "q": "what is hospital",
+      "a": "When you lose all 3 hearts you get hospitalized for 10 hours. You can still do businesses, bank, and minigames. Buy a *Heart Shot* from `.shop` (1M) to restore a heart and leave hospital early.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "what is heart shot": {
+      "q": "what is heart shot",
+      "a": "Heart Shot is a shop item costing $1,000,000. It restores 1 heart and instantly clears hospitalization.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how do hearts work": {
+      "q": "how do hearts work",
+      "a": "You have 3 hearts. Losing fights or taking heavy hits removes hearts. At 0 you are hospitalized for 10h. Heart Shot from the shop restores 1 heart and frees you from hospital.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how does crime work": {
+      "q": "how does crime work",
+      "a": "Use `.crime` or `.crime list` to see available crimes. Success gives cash and XP but raises heat/wanted. Higher level and gear improve odds.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how do i join a heist": {
+      "q": "how do i join a heist",
+      "a": "Someone opens a lobby with `.heist` commands, then others join. There are also solo heists. Check `.heists` or the menu for the current list.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "what is black market": {
+      "q": "what is black market",
+      "a": "Black Market Takeover is a high-level (70+) district auction and control event. Bid on districts, challenge controllers, and earn titles. Use `.blackmarket`.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    },
+    "how do i change my name": {
+      "q": "how do i change my name",
+      "a": "First time is free with `.set name <name>`. After that you need a Name Change Card from `.shop`, then `.set name <newname>`.",
+      "taughtBy": "game-core",
+      "taughtAt": 1789584625231,
+      "hits": 0
+    }
+  }
+}

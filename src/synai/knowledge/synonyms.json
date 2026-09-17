@@ -1,0 +1,26 @@
+{
+  "synonyms": {
+    "cash": ["money", "cash", "funds", "bread", "stacks", "mula", "moolah", "coins", "bankroll"],
+    "help": ["help", "assist", "explain", "how", "guide", "tutorial", "walkthrough"],
+    "steal": ["steal", "rob", "mug", "snatch", "take from", "loot"],
+    "attack": ["attack", "hit", "fight", "raid", "assault", "jump"],
+    "purchase": ["buy", "purchase", "get", "acquire", "cop", "grab"],
+    "income": ["income", "profit", "earnings", "revenue", "drip", "passive"],
+    "crime": ["crime", "job", "hustle", "mission", "gig"],
+    "prison": ["prison", "jail", "cell", "lockup", "pen"],
+    "police": ["police", "cops", "feds", "heat", "law", "5-0"],
+    "friend": ["friend", "buddy", "pal", "mate", "homie", "bro"],
+    "enemy": ["enemy", "rival", "op", "opps", "target"],
+    "strong": ["strong", "powerful", "buffed", "stacked", "jacked"],
+    "weak": ["weak", "fragile", "soft", "squishy"],
+    "fast": ["fast", "quick", "rapid", "speedy"],
+    "good": ["good", "great", "awesome", "solid", "clean", "nice"],
+    "bad": ["bad", "terrible", "awful", "trash", "garbage", "dogshit"],
+    "hello": ["hello", "hi", "hey", "yo", "sup", "greetings", "howdy"],
+    "goodbye": ["bye", "goodbye", "later", "cya", "peace", "farewell"],
+    "thanks": ["thanks", "thank you", "ty", "appreciate", "thx"],
+    "ai": ["ai", "synai", "bot", "robot", "brain"],
+    "gamble": ["gamble", "bet", "wager", "risk"],
+    "trade": ["trade", "swap", "sell", "flip", "invest"]
+  }
+}
