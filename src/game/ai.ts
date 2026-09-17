@@ -27,11 +27,15 @@
 import { Player, getOrCreatePlayer, savePlayer } from './player.js';
 import { askSynAI, rateSynAI } from '../synai/synai.js';
 
-/** Live-boost credential — env only, trimmed (Railway values can carry stray whitespace). */
-const OPENROUTER_API_KEY = (process.env.OPENROUTER_API_KEY || '').trim();
-
-/** Key used only to make the failure log diagnosable; never logs key material. */
-const OPENROUTER_KEY_LEN = OPENROUTER_API_KEY.length;
+/**
+ * Live-boost credential — read from the env at CALL time, never hardcoded.
+ * Lazy reading matters: if the host injects OPENROUTER_API_KEY after this module
+ * is first imported, an import-time constant would be permanently empty, and the
+ * bot would look "unconfigured" even though the variable is set correctly.
+ */
+function readOpenRouterKey(): string {
+  return (process.env.OPENROUTER_API_KEY || '').trim();
+}
 
 /** OpenRouter base URL — Chat Completions lives at `${BASE}/api/v1/chat/completions` */
 const OPENROUTER_BASE_URL = 'https://openrouter.ai';
@@ -134,6 +138,22 @@ interface OpenRouterChatResponse {
 }
 
 /**
+ * Boot-time visibility check for the live-boost credential.
+ * Prints whether THIS process can see the key, so a missing / misnamed / other-
+ * service env var is obvious at startup instead of only on the first `.synai`
+ * fallback. Never prints the key itself.
+ */
+export function logLiveBoostEnvStatus(): void {
+  const key = readOpenRouterKey();
+  console.log(
+    key
+      ? `🔮 Live boost: OPENROUTER_API_KEY visible (len=${key.length}, model=${OPENROUTER_MODEL})`
+      : '🔮 Live boost: OPENROUTER_API_KEY MISSING in this process env — offline brain only. ' +
+        'Set it on the service that runs this bot (right environment), then restart/redeploy.'
+  );
+}
+
+/**
  * Live boost: calls OpenRouter's free DeepSeek model over plain HTTP.
  * Only reached when the offline brain has no answer.
  *
@@ -142,13 +162,14 @@ interface OpenRouterChatResponse {
  * completion) so the caller falls back to the offline reply without burning quota.
  */
 export async function callGeminiLive(question: string): Promise<string | null> {
-  if (!OPENROUTER_API_KEY) {
+  const key = readOpenRouterKey();
+  if (!key) {
     if (!warnedMissingKey) {
       warnedMissingKey = true;
       console.error(
         'OpenRouter live boost OFF: OPENROUTER_API_KEY is not set (or is empty) in this environment — ' +
-        'answers fall back to the offline brain only. Set it on the host, e.g. ' +
-        '`railway variables set OPENROUTER_API_KEY=sk-or-v1-...`'
+        'answers fall back to the offline brain only. Set it on the service that runs this bot, e.g. ' +
+        '`railway variables --set "OPENROUTER_API_KEY=sk-or-v1-..."`, then restart/redeploy.'
       );
     }
     return null;
@@ -164,7 +185,7 @@ export async function callGeminiLive(question: string): Promise<string | null> {
     const res = await fetch(OPENROUTER_CHAT_URL, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        Authorization: `Bearer ${key}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': OPENROUTER_REFERER,
         'X-Title': OPENROUTER_TITLE,
@@ -188,7 +209,7 @@ export async function callGeminiLive(question: string): Promise<string | null> {
         : '';
       console.error(
         `OpenRouter live boost failed: ${res.status} ${res.statusText}` +
-        ` [auth=Bearer keyLen=${OPENROUTER_KEY_LEN} model=${OPENROUTER_MODEL}]${hint}` +
+        ` [auth=Bearer keyLen=${key.length} model=${OPENROUTER_MODEL}]${hint}` +
         (detail ? ` — ${detail.slice(0, 300)}` : '')
       );
       return null;

@@ -19,7 +19,7 @@ import {
 import { startQrServer } from './connection/qrServer.js';
 import { runLoadingAnimation, finalizeWithEdit } from './connection/loadingAnimation.js';
 import { startSynAILearning, tryLiveSkills } from './synai/synai.js';
-import { lastAiSource, callGeminiLive, liveBoostRemaining, recordLiveBoostUse, LIVE_BOOST_DAILY_LIMIT } from './game/ai.js';
+import { lastAiSource, callGeminiLive, logLiveBoostEnvStatus, liveBoostRemaining, recordLiveBoostUse, LIVE_BOOST_DAILY_LIMIT } from './game/ai.js';
 import { getOrCreatePlayer, linkIdentities } from './game/player.js';
 import { isAdmin } from './game/admin.js';
 import { handleCommand } from './commands/handler.js';
@@ -775,6 +775,10 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
 });
 
 startQrServer();
+
+// Live-boost credential check — the host injects env vars before the process
+// starts, so this line shows at boot whether the key actually reached the bot.
+logLiveBoostEnvStatus();
 
 // SynAI background learning (hourly auto-learn + gap fill, unref'd timers)
 startSynAILearning();
