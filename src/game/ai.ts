@@ -1,4 +1,4 @@
-/**
+/*/*
  * .synai — SYN AI, powered by SynAI (offline engine) + an optional Gemini
  * "live boost" for questions the offline brain doesn't know.
  *
@@ -20,14 +20,17 @@
  * exposed in source — rotate/remove it before any real traffic touches
  * this bot.
  */
+import { GoogleGenAI } from '@google/genai';
 import { Player, getOrCreatePlayer, savePlayer } from './player.js';
 import { askSynAI, rateSynAI } from '../synai/synai.js';
 
 const GEMINI_FALLBACK_KEY = 'AQ.Ab8RN6I5Z1S-OhI3LaBKoW81k1GWL8JIG1IylsS2VvTGnG8XuQ'; // TEST KEY — dummy/test use only, rotate before real traffic
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || GEMINI_FALLBACK_KEY;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash-lite';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
 const MAX_QUESTION_LEN = 500;
+
+// Initialize the official Google GenAI SDK to safely parse AQ. format keys
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 /** How long a cached answer-source stays valid for the live-skill upgrade (ms) */
 const SOURCE_TTL_MS = 5 * 60 * 1000;
@@ -101,35 +104,27 @@ Ask me anything about the game — or general chat.
 ▸ .synai good / .synai bad — rate my last answer
 ▸ .synai run 2+2 — safe math
 ${liveLine}
-${name ? `\nYo ${name} ⚡ ` : ''}
+${name ? `\nYo \${name} ⚡ ` : ''}
 Offline brain: unlimited & free · live boost covers what it doesn't know`;
 }
 
-/** Calls Gemini directly. Only reached when the offline brain has no answer. */
+/** Calls Gemini directly via official SDK. Only reached when the offline brain has no answer. */
 export async function callGeminiLive(question: string): Promise<string | null> {
   if (!GEMINI_API_KEY) return null;
   try {
-    const res = await fetch(GEMINI_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': GEMINI_API_KEY,
-      },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: question }] }],
-        generationConfig: { maxOutputTokens: 300, temperature: 0.7 },
-      }),
+    const response = await ai.models.generateContent({
+      model: GEMINI_MODEL,
+      contents: question,
+      config: {
+        maxOutputTokens: 300,
+        temperature: 0.7,
+      }
     });
-    if (!res.ok) {
-      const body = await res.text().catch(() => '');
-      console.error('Gemini API error', res.status, body);
-      return null;
-    }
-    const data: any = await res.json();
-    const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+
+    const answer = response.text?.trim();
     return answer || null;
   } catch (e) {
-    console.error('Gemini fetch failed', e);
+    console.error('Gemini SDK generation failed', e);
     return null;
   }
 }
