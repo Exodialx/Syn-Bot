@@ -21,7 +21,7 @@
   "author": "Syndicates",
   "license": "MIT",
   "dependencies": {
-    "@google/genai": "^0.1.1",
+    "@google/genai": "latest",
     "@whiskeysockets/baileys": "^6.7.16",
     "@hapi/boom": "^10.0.1",
     "wa-sticker-formatter": "^4.4.4",
