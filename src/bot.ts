@@ -689,8 +689,8 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
     const animKey = await runLoadingAnimation(sock, chatJid, raw);
     let aiReply = await handleCommand(canonicalId || senderId, text, { isGroup, mentioned, chatJid });
     // Live upgrade: if the offline brain fell back, try (in order)
-    // 1) free live skills (weather/translate), then 2) Gemini live boost —
-    // the ONLY tier that's capped per-day and costs anything.
+    // 1) free live skills (weather/translate), then 2) the OpenRouter
+    // live boost (free DeepSeek tier) — the ONLY tier that's capped per-day.
     if (aiReply) {
       const question = args.join(' ');
       // Use the source cached by askAi() — re-running the engine here would
@@ -709,8 +709,8 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
               const left = player.isAdmin ? '∞' : String(liveBoostRemaining(player));
               aiReply = `🧠 *SYN AI* · _live boost 🔮_\n▸ ${liveAnswer}\n\n_${left} live boost${left === '1' ? '' : 's'} left today_`;
             }
-            // if Gemini call fails for any reason, aiReply stays as the
-            // offline fallback — no quota burned, no broken response.
+            // if the live boost call fails for any reason, aiReply stays as
+            // the offline fallback — no quota burned, no broken response.
           } else {
             aiReply += `\n\n🔒 Live boost used up for today (${LIVE_BOOST_DAILY_LIMIT}/${LIVE_BOOST_DAILY_LIMIT}).\n🧠 Buy an AI Token in .shop to refill, or it resets at 00:00 UTC.`;
           }
