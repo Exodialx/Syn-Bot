@@ -19,14 +19,19 @@
  * API with a plain Bearer token — no vendor SDK, no Google REST plumbing,
  * so the AQ.-format key problem is gone for good.
  *
- * OPENROUTER_API_KEY should be set as an env var in real deployments; the
- * fallback constant below is this bot's authorized key.
+ * OPENROUTER_API_KEY must be set as an env var on the host — the key is
+ * deliberately NOT hardcoded here. This repo is public, and OpenRouter is a
+ * GitHub secret-scanning partner that disables keys it finds committed to
+ * public repos; a disabled key comes back as `401 {"message":"User not found."}`.
  */
 import { Player, getOrCreatePlayer, savePlayer } from './player.js';
 import { askSynAI, rateSynAI } from '../synai/synai.js';
 
-const OPENROUTER_FALLBACK_KEY = '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'; // authorized production credential
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || OPENROUTER_FALLBACK_KEY;
+/** Live-boost credential — env only, trimmed (Railway values can carry stray whitespace). */
+const OPENROUTER_API_KEY = (process.env.OPENROUTER_API_KEY || '').trim();
+
+/** Key used only to make the failure log diagnosable; never logs key material. */
+const OPENROUTER_KEY_LEN = OPENROUTER_API_KEY.length;
 
 /** OpenRouter base URL — Chat Completions lives at `${BASE}/api/v1/chat/completions` */
 const OPENROUTER_BASE_URL = 'https://openrouter.ai';
@@ -42,6 +47,9 @@ const OPENROUTER_TITLE = process.env.OPENROUTER_TITLE || 'Syn Bot';
 const MAX_QUESTION_LEN = 500;
 /** Hard cap on a live-boost round trip so a hung request never blocks a reply. */
 const LIVE_REQUEST_TIMEOUT_MS = 20_000;
+
+/** Set once so a missing/misnamed env var is loud the first time, then quiet. */
+let warnedMissingKey = false;
 
 /** How long a cached answer-source stays valid for the live-skill upgrade (ms) */
 const SOURCE_TTL_MS = 5 * 60 * 1000;
@@ -134,7 +142,17 @@ interface OpenRouterChatResponse {
  * completion) so the caller falls back to the offline reply without burning quota.
  */
 export async function callGeminiLive(question: string): Promise<string | null> {
-  if (!OPENROUTER_API_KEY) return null;
+  if (!OPENROUTER_API_KEY) {
+    if (!warnedMissingKey) {
+      warnedMissingKey = true;
+      console.error(
+        'OpenRouter live boost OFF: OPENROUTER_API_KEY is not set (or is empty) in this environment — ' +
+        'answers fall back to the offline brain only. Set it on the host, e.g. ' +
+        '`railway variables set OPENROUTER_API_KEY=sk-or-v1-...`'
+      );
+    }
+    return null;
+  }
 
   const q = (question || '').trim();
   if (!q) return null;
@@ -162,8 +180,15 @@ export async function callGeminiLive(question: string): Promise<string | null> {
 
     if (!res.ok) {
       const detail = await res.text().catch(() => '');
+      // 401 on OpenRouter = the credential itself is not usable (revoked,
+      // disabled, deleted account, or not a real key) — NOT a header-format
+      // issue: we always send `Authorization: Bearer <key>`.
+      const hint = res.status === 401
+        ? ' (key rejected — create a fresh key at https://openrouter.ai/settings/keys and update OPENROUTER_API_KEY)'
+        : '';
       console.error(
         `OpenRouter live boost failed: ${res.status} ${res.statusText}` +
+        ` [auth=Bearer keyLen=${OPENROUTER_KEY_LEN} model=${OPENROUTER_MODEL}]${hint}` +
         (detail ? ` — ${detail.slice(0, 300)}` : '')
       );
       return null;
