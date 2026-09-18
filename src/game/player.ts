@@ -575,7 +575,4 @@ ${roleLine}
 ❤️ ${hearts}${hosp}
 🔥 [${heatBar}] ${p.heat}  🚨 ${p.wanted}${revenge}
 ${badgeLine}`;
-❤️ ${hearts}${hosp}
-🔥 [${heatBar}] ${p.heat}  🚨 ${p.wanted}${revenge}
-${badgeLine}`;
 }
