@@ -34,6 +34,7 @@ const PROFILE_PATH = path.join(process.cwd(), 'assets', 'profile.jpg');
 const ACHIEVEMENTS_LB_PATH = path.join(process.cwd(), 'assets', 'achievements-lb.jpg');
 const STORE_PATH = path.join(process.cwd(), 'assets', 'store.jpg');
 const CRYPTO_PATH = path.join(process.cwd(), 'assets', 'crypto.jpg');
+const MENU_IMAGE_PATH = path.join(process.cwd(), 'assets', 'images.jpg');
 
 export type MessageHandler = (
   chatJid: string,
@@ -676,6 +677,11 @@ export async function sendWithStore(chatJid: string, caption: string, quotedMsg?
 
 export async function sendWithCrypto(chatJid: string, caption: string, quotedMsg?: WAMessage) {
   await sendCaptionedImage(chatJid, CRYPTO_PATH, caption, quotedMsg);
+}
+
+/** Menu messages carry assets/images.jpg (falls back to plain text if missing). */
+export async function sendWithMenu(chatJid: string, caption: string, quotedMsg?: WAMessage) {
+  await sendCaptionedImage(chatJid, MENU_IMAGE_PATH, caption, quotedMsg);
 }
 
 export function getSocket() {

@@ -554,18 +554,27 @@ export function formatProfile(p: Player): string {
     p.role === 'Businessman' ? `💼 Portfolio ${(p.businesses || []).length} fronts` :
     '❓ Pick a role · .role';
 
+  // guild abbreviation
+  const guildId = (p as any).guildId;
+  const guild = guildId ? (db.guilds?.[guildId] as any) : null;
+  const guildTag = guild?.tag || null;
+
   return `👤 *PROFILE*${adminTag}${prem}
 ━━━━━━━━━━━━━━━━━━━━
-${roleIcon} *${displayName}*  ·  ${p.role || 'None'}
+${roleIcon} *${displayName}*${guildTag ? ` [${guildTag}]` : ''}  ·  ${p.role || 'None'}
 Lv ${p.level} · Class ${p.classLevel} · Rank ${nwRank}
 ID …${p.id.slice(-6)}
-
+${guildTag ? `⚔️ Guild [${guildTag}]${guild?.motto ? ` · _"${guild.motto}"_` : ''}` : ''}
+━━━━━━━━━━━━━━━━━━━━
 💰 $${(p.cash || 0).toLocaleString()}  🏦 $${(p.bank || 0).toLocaleString()}
 🏢 Biz ${(p.businesses || []).length}  ·  Top: ${topBiz}
 ${roleLine}
-
+━━━━━━━━━━━━━━━━━━━━
 ⚔️${p.strength} 🛡️${p.defense} 🕴️${p.stealth} 🎭${p.charisma} 🔮${p.intelligence} 🎲${p.luck} 🧲${p.security}
-
+━━━━━━━━━━━━━━━━━━━━
+❤️ ${hearts}${hosp}
+🔥 [${heatBar}] ${p.heat}  🚨 ${p.wanted}${revenge}
+${badgeLine}`;
 ❤️ ${hearts}${hosp}
 🔥 [${heatBar}] ${p.heat}  🚨 ${p.wanted}${revenge}
 ${badgeLine}`;

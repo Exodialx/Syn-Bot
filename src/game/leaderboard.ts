@@ -1,9 +1,16 @@
 import { getAllPlayers, Player } from './player.js';
 import { getDb } from '../db/database.js';
 
+function guildTag(p: Player): string {
+  const gid = (p as any).guildId;
+  const g = gid ? (getDb() as any).guilds?.[gid] : null;
+  return g?.tag || null;
+}
+
 function displayName(p: Player): string {
   if ((p as any).usernameSet && p.name) return p.name;
-  return `…${p.id.slice(-4)}`;
+  const gt = guildTag(p);
+  return gt ? `…${p.id.slice(-4)} [${gt}]` : `…${p.id.slice(-4)}`;
 }
 
 function roleTag(p: Player): string {
@@ -23,10 +30,13 @@ function podiumBlock(
 ): string {
   if (!top.length) return 'No players yet.\n';
   const medals = ['🥇', '🥈', '🥉'];
+  const db = getDb();
   let out = '';
   for (let i = 0; i < Math.min(3, top.length); i++) {
     const p = top[i];
-    out += `${medals[i]}  ${roleTag(p)} *${displayName(p)}*\n`;
+    const gid = (p as any).guildId;
+    const gt = gid ? ((db as any).guilds?.[gid] as any)?.tag : null;
+    out += `${medals[i]}  ${roleTag(p)} *${displayName(p)}${gt ? ` [${gt}]` : ''}*\n`;
     out += `     ${valueFn(p)}\n\n`;
   }
   return out;
@@ -38,10 +48,13 @@ function listRows(
   valueFn: (p: Player) => string
 ): string {
   if (!slice.length) return '';
+  const db = getDb();
   let out = '';
   slice.forEach((p, i) => {
     const rank = startRank + i;
-    out += `\`${String(rank).padStart(2, ' ')}\`  ${roleTag(p)} ${displayName(p)}\n`;
+    const gid = (p as any).guildId;
+    const gt = gid ? ((db as any).guilds?.[gid] as any)?.tag : null;
+    out += `\`${String(rank).padStart(2, ' ')}\`  ${roleTag(p)} ${displayName(p)}${gt ? ` [${gt}]` : ''}\n`;
     out += `      ${valueFn(p)}\n`;
   });
   return out;

@@ -1,6 +1,6 @@
 /**
  * SYN multi-game platform — per-group module config (max 2)
- * Games: syndicates | fisch | utility | konoha (soon)
+  * Games: syndicates | fisch | utility | UNC (konoha)
  */
 import { getDb, saveDb } from '../db/database.js';
 import { formatMenu as formatSyndicatesMenu } from './menu.js';
@@ -8,13 +8,13 @@ import { formatUtilityMenu } from './utilityPack.js';
 import { formatFischMenu, getFischPlayer } from './fisch.js';
 import { Player } from './player.js';
 
-export const SYN_VERSION = 'v2.1.0';
-export const SYN_TAGLINE = 'SYN v2.1.0 • Next Generation of Text Based Games';
+export const SYN_VERSION = 'v2.0.0';
+export const SYN_TAGLINE = 'SYN v2.0.0 • Next Generation of Text Based Games';
 export const CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMtb5545v3ntesmm40';
 export const CHANNEL_NAME = 'SYN';
 export const BOT_OWNER_NAME = 'Exodial';
 
-export type GameId = 'syndicates' | 'konoha' | 'utility' | 'fisch';
+export type GameId = 'syndicates' | 'unc' | 'utility' | 'fisch';
 
 export type GroupPlatformConfig = {
   modules: GameId[]; // max 2
@@ -33,12 +33,12 @@ const REGISTRY: Record<
     status: 'live',
     blurb: 'Crime city · biz · PvP · heists',
   },
-  konoha: {
-    id: 'konoha',
-    name: 'Konoha',
-    emoji: '🍃',
+    unc: {
+    id: 'unc',
+    name: 'UNC (Konoha)',
+    emoji: '🍥',
     status: 'soon',
-    blurb: 'Shinobi ranks · missions · villages',
+    blurb: 'Ninja village · clans · mission runs · jutsu',
   },
   utility: {
     id: 'utility',
@@ -83,7 +83,7 @@ export function isUnlocked(chatJid: string): boolean {
 
 export function hasModule(chatJid: string, game: GameId): boolean {
   if (!chatJid?.endsWith('@g.us')) {
-    return game === 'syndicates' || game === 'utility' || game === 'fisch';
+    return game === 'syndicates' || game === 'utility' || game === 'fisch' || game === 'unc';
   }
   const m = getGroupPlatform(chatJid).modules;
   if (m.length === 0) return true; // unlocked = all available
@@ -115,7 +115,7 @@ All SYN modules available.
   }
   if (sub === 'remove' || sub === 'rm') {
     const id = normalizeGame(args[1] || '');
-    if (!id) return 'Usage: .configure remove syndicates|utility|fisch|konoha';
+    if (!id) return 'Usage: .configure remove syndicates|utility|fisch|unc';
     c.modules = c.modules.filter((x) => x !== id);
     store()[chatJid] = c;
     saveDb();
@@ -124,20 +124,17 @@ All SYN modules available.
 
   const id = normalizeGame(sub);
   if (!id) {
-    return `Usage:
-.configure syndicates
+    return `Usage: .configure syndicates
 .configure fisch
 .configure utility
-.configure konoha
+.configure unc
 .configure remove <game>
 .configure off
 .configure status
 
 Max *2* modules per group.`;
   }
-  if (REGISTRY[id].status === 'soon' && id === 'konoha') {
-    // allow configuring as "soon" lock for branding
-  }
+  
   if (c.modules.includes(id)) {
     return `✅ *${REGISTRY[id].name}* already configured here.`;
   }
@@ -164,7 +161,7 @@ function normalizeGame(raw: string): GameId | null {
   const s = raw.toLowerCase().trim();
   if (['syn', 'syndicate', 'syndicates', 'crime', '1'].includes(s)) return 'syndicates';
   if (['fisch', 'fish', 'ocean', 'sea', '4'].includes(s)) return 'fisch';
-  if (['konoha', 'naruto', 'ninja', 'shinobi', '2'].includes(s)) return 'konoha';
+  if (['konoha', 'naruto', 'ninja', 'shinobi', '2', 'unc', 'university', 'college'].includes(s)) return 'unc';
   if (['util', 'utility', 'tools', 'mod', '3'].includes(s)) return 'utility';
   return null;
 }
@@ -174,7 +171,9 @@ export function formatConfigureStatus(chatJid: string): string {
   const lines =
     c.modules.length === 0
       ? '▸ Unlocked — all modules visible'
-      : c.modules.map((m) => `▸ ${REGISTRY[m].emoji} ${REGISTRY[m].name} (${REGISTRY[m].status})`).join('\n');
+      : c.modules
+          .map((m) => `▸ ${REGISTRY[m].emoji} ${REGISTRY[m].name} (${REGISTRY[m].status === 'soon' ? 'In dev' : 'live'}) — ${REGISTRY[m].blurb}`)
+          .join('\n');
   return `⚙️ *GROUP CONFIG*
 ━━━━━━━━━━━━━━━━━━━━
 ${lines}
@@ -196,7 +195,7 @@ export function formatPlatformMenu(player: Player, chatJid: string): string {
     const parts: string[] = [];
     if (c.modules.includes('syndicates')) parts.push(formatSyndicatesMenu(player));
     if (c.modules.includes('utility')) parts.push(formatUtilityMenu());
-    if (c.modules.includes('konoha')) parts.push(formatKonohaSoon());
+    if (c.modules.includes('unc')) parts.push(formatUncTeaser());
     if (c.modules.includes('fisch')) parts.push(formatFischMenu(getFischPlayer(player.id)));
     return parts.join('\n\n') + footer();
   }
@@ -207,9 +206,9 @@ export function formatPlatformMenu(player: Player, chatJid: string): string {
 *Next Generation of Text Based Games*
 
 `;
-  for (const id of ['syndicates', 'fisch', 'konoha', 'utility'] as GameId[]) {
+  for (const id of ['syndicates', 'fisch', 'unc', 'utility'] as GameId[]) {
     const g = REGISTRY[id];
-    const badge = g.status === 'soon' ? '_coming soon_' : '*LIVE*';
+    const badge = g.status === 'soon' ? '_in dev_' : '*LIVE*';
     out += `${g.emoji} *${g.name}* · ${badge}
    ${g.blurb}\n\n`;
   }
@@ -220,24 +219,38 @@ export function formatPlatformMenu(player: Player, chatJid: string): string {
 🏙️ Syndicates → .profile · .crime · .biz
 🎣 FISCH → .fisch · .fish · .sail
 🛠️ Utility → .utility · .mod
-🍃 Konoha → soon
+🍥 UNC (Konoha) → .configure unc (In dev — ninja village, clans, mission runs, jutsu)
 ━━━━━━━━━━━━━━━━━━━━
 ${SYN_TAGLINE}
 ${CHANNEL_URL}`;
   return out;
 }
 
-export function formatKonohaSoon(): string {
-  return `🍃 *KONOHA*
-━━━━━━━━━━━━━━━━━━━━
-Shinobi ranks · missions · villages
-*Coming soon.*
+export function formatUncTeaser(): string {
+  return `🎓 *UNC (KONOHA)*
+━━━━━━━━━━━━ IN DEV ━━━━━━━━━━━━
+        coming soon to SYN.
+     · ninja · chakra.
 
-Configure placeholder:
-.configure konoha
+Configure:
+.configure unc
 
 Meanwhile play *Syndicates* or enable *Utility*.
-━━━━━━━━━━━━━━━━━━━━
+
+export function formatVersion(): string {
+  return `📦 *SYN ${SYN_VERSION}*
+
+${SYN_TAGLINE}
+
+Modules
+🏙️ Syndicates — live
+🎣 FISCH — live
+🍥 UNC (Konoha) — In dev · ninja village, clans, mission runs, jutsu
+🛠️ Utility — live
+
+Owner: *${BOT_OWNER_NAME}*`;
+}
+━━━
 ${SYN_TAGLINE}`;
 }
 
@@ -294,7 +307,7 @@ export function commandAllowed(chatJid: string, cmd: string): { ok: boolean; msg
   const needFisch = FISCH_CMDS.has(c);
   const hasSyn = conf.modules.includes('syndicates');
   const hasUtil = conf.modules.includes('utility');
-  const hasKonoha = conf.modules.includes('konoha');
+  const hasUnc = conf.modules.includes('unc');
   const hasFisch = conf.modules.includes('fisch');
 
   if (needSyn && !hasSyn) {
@@ -319,11 +332,11 @@ export function commandAllowed(chatJid: string, cmd: string): { ok: boolean; msg
       msg: `🔒 FISCH is not enabled here.\nAdmin: .configure fisch\nActive: ${conf.modules.join(', ') || 'unlocked'}`,
     };
   }
-  if (c.startsWith('kono') || c === 'jutsu' || c === 'mission') {
-    if (!hasKonoha) {
-      return { ok: false, msg: '🍃 Konoha is not enabled / coming soon.\n.configure konoha (placeholder)' };
+  if (c.startsWith('unc') || c === 'jutsu' || c === 'mission' || c === 'campus' || c === 'crew' || c === 'ninja' || c === 'clan') {
+    if (!hasUnc) {
+      return { ok: false, msg: '🍥 UNC (Konoha) is not enabled here.\n.configure unc' };
     }
-    return { ok: false, msg: formatKonohaSoon() };
+    return { ok: false, msg: formatUncTeaser() };
   }
   return { ok: true };
 }
@@ -336,7 +349,7 @@ ${SYN_TAGLINE}
 Modules
 🏙️ Syndicates — live
 🎣 FISCH — live
-🍃 Konoha — coming soon
+UNC (Konoha) — In dev
 🛠️ Utility — live
 
 Owner: *${BOT_OWNER_NAME}*`;

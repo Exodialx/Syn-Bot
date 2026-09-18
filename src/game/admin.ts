@@ -41,6 +41,42 @@ export function promoteToAdmin(playerId: string): string {
 Permanent. Use .adm`;
 }
 
+// ── BOT OWNER tier (full SynAI access) ──
+// Granted via the secret .synai01 command — knowing the command IS the key.
+// Owner gets: unlimited .synai, ops, listen/unlisten, gcbrief, abuse, library,
+// data gc, .synai play. Regular admins only get .synai <question> at 4/day.
+export function isBotOwner(id: string): boolean {
+  const clean = String(id || '').replace(/[^0-9]/g, '');
+  if (!clean) return false;
+  try {
+    const p = getPlayer(clean);
+    return !!(p as any)?.isBotOwner;
+  } catch {
+    return false;
+  }
+}
+
+export function promoteToBotOwner(playerId: string): string {
+  const p = getOrCreatePlayer(playerId);
+  if ((p as any).isBotOwner) return '👑 Already bot owner.';
+  (p as any).isBotOwner = true;
+  p.isAdmin = true; // owner outranks admins
+  savePlayer(p);
+  logAdmin(playerId, 'owner_promote', playerId, '.synai01');
+  return `👑 *BOT OWNER ACCESS GRANTED*
+━━━━━━━━━━━━━━━━━━━━
+Full SynAI unlocked:
+▸ .synai <question> — unlimited
+▸ .synai ops <question>
+▸ .synai listen | unlisten | listening
+▸ .synai gcbrief | data gc
+▸ .synai abuse log | clear
+▸ .synai library [slot]
+▸ .synai play <command> — play the game via AI
+━━━━━━━━━━━━━━━━━━━━
+Secret. Never share this command.`;
+}
+
 /** Economy health model */
 export function calcEconomyHealth(): {
   players: number;

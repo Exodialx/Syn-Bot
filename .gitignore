@@ -5,3 +5,7 @@ node_modules/
 !.env.example
 *.local
 
+
+dist/
+
+data/backups/

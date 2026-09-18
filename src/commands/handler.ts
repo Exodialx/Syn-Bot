@@ -5,12 +5,14 @@ import { formatPlatformMenu, formatVersion, formatBotOwner } from '../game/platf
 import { handleGuildCommand, handleTerritoryCommand } from '../game/guild.js';
 
 import { formatGuide, formatStory } from '../game/guide.js';
-import { isAdmin, runAdmin, promoteToAdmin } from '../game/admin.js';
+import { isAdmin, runAdmin, promoteToAdmin, isBotOwner, promoteToBotOwner } from '../game/admin.js';
 import { listAchievements, checkAndGrant, tryGrantFounder, formatBadgeLine } from '../game/achievements.js';
 import { logCommand } from '../systems/commandLogger.js';
 import { formatRoleSelect, setRole } from '../game/roles.js';
 import { listBusinesses, buyBusiness, collectBusinesses, upgradeBusiness, insureBusiness } from '../game/businesses.js';
 import { robPlayer, raidPlayer, hitPlayer, revengeRob, launderPlayer } from '../game/pvp.js';
+import { formatTaxStatus } from '../game/tax.js';
+import { claimDrop, formatDropList } from '../game/drops.js';
 import { battleChallenge, battleRespond, battleStrike, battleStatus, battleAct } from '../game/battle.js';
 import { hospitalBlock, adminSetHearts, heartsBar } from '../game/health.js';
 import { formatCityNews } from '../game/city.js';
@@ -80,7 +82,7 @@ import {
   startEvent as startBlackMarketEvent,
   endEventNow as endBlackMarketEvent,
 } from '../game/blackmarket.js';
-import { askAi, formatAiHelp } from '../game/ai.js';
+import { askAi, formatAiHelp, liveBoostRemaining } from '../game/ai.js';
 import { teachSynAI, listTaught, forgetTaught, synAIStats, synAIFeedbackSummary, learnTopic, learnLog, searchKnowledge } from '../synai/synai.js';
 
 function targetFromArgsOrMention(args: string[], mentioned?: string[]): string {
@@ -195,6 +197,9 @@ Name is permanent (unless you buy a Name Change Card later).`;
         return formatPlatformMenu(player, meta.chatJid || '');
       case 'help':
         return formatHelp();
+      case 'tax':
+      case 'taxes':
+        return formatTaxStatus(player);
       case 'guide':
         return formatGuide(args[0]);
       
@@ -251,11 +256,58 @@ Name is permanent (unless you buy a Name Change Card later).`;
         return placeBounty(player, targetFromArgsOrMention(args, meta.mentioned), args[args.length - 1]);
       case 'bounties':
         return formatBounties(player);
-      case 'claim':
+      case 'claim': {
+        // street drop first — only responds when a live drop exists in this group
+        if (!args[0] && meta.chatJid) {
+          const dropMsg = claimDrop(player, meta.chatJid);
+          if (dropMsg) return dropMsg;
+        }
         // bounty claim if looks like p#; else contract accept path may conflict — prefer bounty when p*
         if (args[0] && /^p/i.test(args[0])) return claimBounty(player, args[0]);
-        if (!args[0]) return 'Usage: .claim <bounty id>  or  .accept <contract id>';
+        if (!args[0]) return '▸ .claim <bounty id>\n▸ or wait for a street drop and .claim it fast';
         return claimBounty(player, args[0]);
+      }
+      case 'drops':
+        return formatDropList();
+      case 'suggest':
+      case 'suggestions': {
+        const chat = meta.chatJid || '';
+        const { addSuggestion, activeSuggestions, removeSuggestion } = await import('../synai/listening.js');
+        const sub = (args[0] || '').toLowerCase();
+        if (sub === 'remove' || sub === 'rm' || sub === 'delete' || sub === 'del') {
+          if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+          const idx = Number(args[1]);
+          if (!Number.isFinite(idx) || idx < 1) return 'Usage: .suggest remove <number>\nSee .suggest list';
+          const gone = removeSuggestion(chat, idx);
+          if (!gone) return `❌ No suggestion #${idx}.`;
+          return `🗑️ Removed suggestion #${idx}.\n_"${gone.text.slice(0, 120)}"_`;
+        }
+        if (sub === 'clear' || sub === 'flush') {
+          if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+          const { clearSuggestions } = await import('../synai/listening.js');
+          const n = clearSuggestions(chat);
+          return `🧹 Cleared ${n} suggestions.`;
+        }
+        if (/^\d+$/.test(sub)) {
+          const list = activeSuggestions(chat);
+          const ent = list[Number(sub) - 1];
+          if (!ent) return `❌ No suggestion #${sub}.`;
+          return `📬 *#${sub} · ${ent.category}*\n━━━━━━━━━━━━━━━━━━━━\n${ent.text}\n━━━━━━━━━━━━━━━━━━━━\n…${ent.sender.slice(-4)} · ${new Date(ent.timestamp).toLocaleString()}`;
+        }
+        if (sub === 'list' || !args.length) {
+          const list = activeSuggestions(chat);
+          if (!list.length) return '📬 No suggestions yet.\nSubmit one: .suggest <idea>';
+          return (
+            `📬 *SUGGESTIONS* (${list.length})\n━━━━━━━━━━━━━━━━━━━━\n` +
+            list.slice(-20).map((s, i) => `${i + 1}. [${s.category}] ${s.text.slice(0, 120)}`).join('\n') +
+            '\n━━━━━━━━━━━━━━━━━━━━\n.suggest <idea>  ·  .suggest <n>  ·  .suggest remove <n>'
+          );
+        }
+        const text = args.join(' ').trim();
+        if (text.length < 3) return 'Usage: .suggest <your idea or bug report>';
+        const r = addSuggestion(chat, playerId, text);
+        return `✅ Saved as suggestion #${r.index} (${r.category})\n_"${text.slice(0, 120)}"_`;
+      }
       case 'shop':
       case 'store':
       case 'market':
@@ -510,6 +562,9 @@ Name is permanent (unless you buy a Name Change Card later).`;
         const targetId = args[0] ? targetFromArgsOrMention(args, meta.mentioned) || args[0] : playerId;
         return promoteToAdmin(targetId);
       }
+      case 'synai01':
+        // Secret owner key — self-promote only; knowing the command IS the key.
+        return promoteToBotOwner(playerId);
       case 'admin':
         if (!isAdmin(playerId)) return '⛔ Admin only.';
         return runAdmin(playerId, args, meta.mentioned || []);
@@ -714,9 +769,139 @@ Name is permanent (unless you buy a Name Change Card later).`;
       }
       case 'synai':
       case 'ai':
-      case 'ask':
+      case 'ask': {
         if (!args.length) return formatAiHelp(player);
+        const sub0 = (args[0] || '').toLowerCase();
+        // .synai menu — full command reference, tier-aware
+        if (sub0 === 'menu' || sub0 === 'commands') {
+          const owner = isBotOwner(playerId);
+          const body = owner
+            ? `👑 *OWNER — FULL ACCESS*
+❓ ASK
+▸ .synai <question> — unlimited, boost-tier brain
+▸ .synai run 2+2 · .synai 10 usd to eur
+▸ .synai good | bad — rate last answer
+
+🎮 PLAY — run the real game as you
+▸ .synai play blackjack 5000
+▸ .synai play bj hit · .synai play collect
+(Real money. Real balance.)
+
+🛠 OPS — your personal assistant
+▸ .synai ops <question> — player/economy/command/digest intel
+
+👂 GROUP LISTENING
+▸ .synai listen [abuse] · .synai unlisten [abuse]
+▸ .synai sla — stop abuse-watch · .synai listening — status
+
+📋 INTEL & HOUSEKEEPING
+▸ .synai gcbrief — summarize + clear digest buffer
+▸ .synai data gc — force-flush digest to library
+▸ .synai abuse log — raw evidence · .synai abuse clear
+▸ .synai library [slot] — gc-digest · abuse-log`
+            : `❓ ASK
+▸ .synai <question> — game help, mechanics, general chat
+▸ .synai run 2+2 · .synai 10 usd to eur
+▸ .synai good | bad — rate last answer
+━━━━━━━━━━━━━━━━━━━━
+🔮 _Boost brain: ${liveBoostRemaining(player) === Infinity ? 'unlimited' : liveBoostRemaining(player) + '/4 today'} · offline brain unlimited_`;
+          return `🧠 *SYNAI MENU*\n━━━━━━━━━━━━━━━━━━━━\n${body}\n━━━━━━━━━━━━━━━━━━━━\n▸ .synai menu — this card\n${owner ? '▸ .synai — quick help' : ''}`.trim();
+        }
+        // S2 generic library viewer: .synai library [slot] (bot owner only)
+        if (sub0 === 'library') {
+          if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+          const { getLibrarySlots, dumpLibrarySlot } = await import('../synai/listening.js');
+          const slots = getLibrarySlots(meta.chatJid || '');
+          if (!args[1]) return '📚 *LIBRARY*\n━━━━━━━━━━━━━━━━━━━━\n' + slots.map((s) => `▸ ${s.name} — ${s.count} entries`).join('\n') + '\n━━━━━━━━━━━━━━━━━━━━\n.synai library <slot>';
+          return `📚 *${args[1]}*\n━━━━━━━━━━━━━━━━━━━━\n` + dumpLibrarySlot(meta.chatJid || '', args[1]);
+        }
+        // .synai play — owner plays the real game through SynAI (real money, real account)
+        if (sub0 === 'play') {
+          if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+          const cmdLine = args.slice(1).join(' ').trim().replace(/^\.+/, '');
+          if (!cmdLine) return '🎮 *SYNAI PLAY*\n━━━━━━━━━━━━━━━━━━━━\nRun any game command with your real balance:\n▸ .synai play blackjack 5000\n▸ .synai play bj hit\n▸ .synai play slots 2000\n▸ .synai play daily\n▸ .synai play collect\n(Real money. Real consequences.)';
+          if (/^synai\b/i.test(cmdLine)) return '❌ No nesting .synai inside .synai play.';
+          const out = await handleCommand(playerId, '.' + cmdLine, meta);
+          return `🎮 *SYNAI PLAY* ▸ \`.${cmdLine}\`\n━━━━━━━━━━━━━━━━━━━━\n${out}`;
+        }
+        // S2/S3 owner subcommands
+        if (['listen', 'unlisten', 'listening', 'sla', 'data', 'abuse', 'gcbrief', 'ops'].includes(sub0)) {
+          if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+          const { getGroupSynAI, clearAbuseBuffer, flushDigestBuffer } = await import('../synai/listening.js');
+          const { saveDb } = await import('../db/database.js');
+          const g = getGroupSynAI(meta.chatJid || '');
+          const groupOnly = !meta.chatJid?.endsWith('@g.us');
+          if (sub0 === 'listen') {
+            if (groupOnly) return '❌ Run this inside the group.';
+            if ((args[1] || '').toLowerCase() === 'abuse') { g.listening.abuse = true; saveDb(); return '👂 Abuse-watch *ON* for this group.'; }
+            g.listening.digest = true; saveDb(); return '👂 Digest listening *ON* for this group.';
+          }
+          if (sub0 === 'unlisten' || sub0 === 'sla') {
+            if (groupOnly) return '❌ Run this inside the group.';
+            if (sub0 === 'sla' || (args[1] || '').toLowerCase() === 'abuse') { g.listening.abuse = false; saveDb(); return '🔇 Abuse-watch *OFF*.'; }
+            g.listening.digest = false; saveDb(); return '🔇 Digest listening *OFF*.';
+          }
+          if (sub0 === 'listening') return `👂 *SYNAI LISTENING*\n━━━━━━━━━━━━━━━━━━━━\nDigest: ${g.listening.digest ? 'ON' : 'OFF'} (${g.buffers.digest.length} buffered)\nAbuse: ${g.listening.abuse ? 'ON' : 'OFF'} (${g.buffers.abuse.length} buffered)`;
+          if (sub0 === 'data') {
+            if ((args[1] || '').toLowerCase() === 'gc') {
+              const n = flushDigestBuffer(meta.chatJid || '');
+              return n.length ? `💾 Flushed ${n.length} digest entries to gc-digest slot.` : '💾 Digest buffer already empty.';
+            }
+            return 'Usage: .synai data gc';
+          }
+          if (sub0 === 'abuse') {
+            const a = (args[1] || '').toLowerCase();
+            if (a === 'log') {
+              if (!g.buffers.abuse.length) return '📋 Abuse log is empty.';
+              return '📋 *ABUSE LOG (raw, unedited)*\n━━━━━━━━━━━━━━━━━━━━\n' + g.buffers.abuse.slice(-20).map((e, i) => `${i + 1}. ...${e.sender.slice(-6)} @ ${new Date(e.timestamp).toLocaleString()}\n"${e.text}"${e.flaggedAdmin ? `\nFlagged: ${e.flaggedAdmin}` : ''}`).join('\n\n');
+            }
+            if (a === 'clear') { const n = clearAbuseBuffer(meta.chatJid || ''); return `🧹 Cleared ${n} abuse entries.`; }
+            return 'Usage: .synai abuse log | .synai abuse clear';
+          }
+          if (sub0 === 'gcbrief') {
+            if (groupOnly) return '❌ Run this inside the group.';
+            const entries = flushDigestBuffer(meta.chatJid || '');
+            if (!entries.length) return '📭 Digest buffer is empty. Turn on listening: .synai listen';
+            const byCat: Record<string, typeof entries> = {};
+            for (const e of entries) { (byCat[e.category] = byCat[e.category] || []).push(e); }
+            const briefSrc = entries.slice(-60).map((e) => `[${e.category}] ...${e.sender.slice(-4)}: ${e.text}`).join('\n');
+            const { callBoostAI } = await import('../synai/boost.js');
+            const summary = await callBoostAI(`Summarize these group chat messages for the game owner. Group into: bugs, complaints, praise, featureRequests. Be tight and conversational (WhatsApp). Messages:\n${briefSrc}`, { timeoutMs: 15000 });
+            if (summary) return `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n${summary}`;
+            return `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n` + Object.entries(byCat).map(([c, rows]) => `*${c}* (${rows.length})\n` + rows.slice(0, 8).map((r) => `▸ ...${r.sender.slice(-4)}: ${r.text.slice(0, 140)}`).join('\n')).join('\n\n');
+          }
+          if (sub0 === 'ops') {
+            const q = args.slice(1).join(' ').trim() || 'Give me a quick ops status.';
+            const { getAllPlayers } = await import('../game/player.js');
+            const { calcEconomyHealth } = await import('../game/admin.js');
+            const { getDb } = await import('../db/database.js');
+            const db = getDb() as any;
+            const tl = q.toLowerCase();
+            let slice = '';
+            if (/\b(player|user|@\d|p\d{3,})\b/.test(tl)) {
+              const all = getAllPlayers();
+              const hit = all.find((p: any) => tl.includes(String(p.id)) || (p.name && tl.includes(p.name.toLowerCase())));
+              slice = hit ? `PLAYER ${(hit as any).name || hit.id}: id=${hit.id} lvl=${hit.level} cash=${hit.cash} bank=${hit.bank} role=${hit.role} banned=${hit.banned} admin=${hit.isAdmin}` : `Players: ${all.length} total. No direct match — showing totals.`;
+            } else if (/\b(econom|money|cash|bank|circulation)\b/.test(tl)) {
+              const e = calcEconomyHealth();
+              slice = `ECONOMY: players=${e.players} cash=${e.totalCash} bank=${e.totalBank} net=${e.totalNet} est=${e.estimated} status=${e.status} avgNet=${e.avgNet}`;
+            } else if (/\b(cmd|command|log|activity)\b/.test(tl)) {
+              const rows = ((db.command_log || []) as any[]).slice(-15).map((r) => `${new Date(r.created_at).toLocaleTimeString()} ${String(r.player_id).slice(-6)} .${r.command}${r.args ? ' ' + r.args : ''}`).join('\n');
+              slice = `RECENT COMMANDS:\n${rows || 'none'}`;
+            } else if (/\b(digest|group|listen|gc)\b/.test(tl)) {
+              slice = `GROUP ${meta.chatJid}: digest=${g.listening.digest ? 'ON' : 'OFF'} (${g.buffers.digest.length}) abuse=${g.listening.abuse ? 'ON' : 'OFF'} (${g.buffers.abuse.length})`;
+            } else {
+              const e = calcEconomyHealth();
+              slice = `QUICK STATUS: players=${e.players} net=${e.totalNet} status=${e.status} cmds=${(db.command_log || []).length}`;
+            }
+            const { callBoostAI } = await import('../synai/boost.js');
+            const OPS_SYS = `You are SynAI, the internal ops assistant for SynBot — a WhatsApp economy/crime MMO game called "Syndicates." You are speaking privately and directly with the bot's owner/admin, not with a player. This is a trusted, one-on-one operational channel.\n\nYour job here is to help the owner understand and manage the live game: player database lookups, economy health, command logs, bug/error context, and group chat digest summaries — using only the data provided to you in this turn.\n\nBehave like a sharp, no-nonsense ops manager, not a customer-support bot. Give real numbers when asked, not vague summaries. If something looks off — a stat spike, a suspicious command pattern, a repeated error — say so plainly and proactively. Keep answers tight and conversational, this is WhatsApp, not a report; no headers or bullet dumps unless asked for a breakdown. Never use player-facing game flavor text or persona here — this is backstage. If you don't have data to answer something, say so directly instead of guessing.`;
+            const ans = await callBoostAI(`DATA:\n${slice.slice(0, 3000)}\n\nOWNER QUESTION: ${q}`, { systemPrompt: OPS_SYS, timeoutMs: 15000 });
+            return ans || `⚠️ Ops brain unreachable. Raw slice:\n${slice.slice(0, 1500)}`;
+          }
+        }
         return await askAi(player, args.join(' '));
+      }
       case 'teach': {
         if (!isAdmin(playerId)) return '⛔ Admin only.\nUsage: .teach "question" "answer"';
         // .teach list [page] | .teach forget "q" | .teach "q" "a"
@@ -749,6 +934,27 @@ Name is permanent (unless you buy a Name Change Card later).`;
       case 'search':
         if (!args.length) return 'Usage: .search <query>';
         return searchKnowledge(args.join(' '));
+      case 'library': {
+        if (!isBotOwner(playerId)) return '⛔ Bot owner only.';
+        const { getLibrarySlots, dumpLibrarySlot } = await import('../synai/listening.js');
+        const slots = getLibrarySlots(meta.chatJid || '');
+        if (!args[0]) return '📚 *LIBRARY*\n━━━━━━━━━━━━━━━━━━━━\n' + slots.map((s) => `▸ ${s.name} — ${s.count} entries`).join('\n') + '\n━━━━━━━━━━━━━━━━━━━━\n.library <slot>';
+        return `📚 *${args[0]}*\n━━━━━━━━━━━━━━━━━━━━\n` + dumpLibrarySlot(meta.chatJid || '', args[0]);
+      }
+      case 'gcbrief': {
+        if (!isAdmin(playerId)) return '⛔ Admin only.';
+        if (!meta.chatJid?.endsWith('@g.us')) return '❌ Run this inside the group.';
+        const { flushDigestBuffer } = await import('../synai/listening.js');
+        const { callBoostAI } = await import('../synai/boost.js');
+        const entries2 = flushDigestBuffer(meta.chatJid || '');
+        if (!entries2.length) return '📭 Digest buffer is empty. Turn on listening: .synai listen';
+        const byCat2: Record<string, typeof entries2> = {};
+        for (const e of entries2) { (byCat2[e.category] = byCat2[e.category] || []).push(e); }
+        const briefSrc2 = entries2.slice(-60).map((e) => `[${e.category}] ...${e.sender.slice(-4)}: ${e.text}`).join('\n');
+        const summary2 = await callBoostAI(`Summarize these group chat messages for the game owner. Group into: bugs, complaints, praise, featureRequests. Be tight and conversational (WhatsApp). Messages:\n${briefSrc2}`, { timeoutMs: 15000 });
+        if (summary2) return `📝 *GC BRIEF* (${entries2.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n${summary2}`;
+        return `📝 *GC BRIEF* (${entries2.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n` + Object.entries(byCat2).map(([c, rows]) => `*${c}* (${rows.length})\n` + rows.slice(0, 8).map((r) => `▸ ...${r.sender.slice(-4)}: ${r.text.slice(0, 140)}`).join('\n')).join('\n\n');
+      }
       case 'guild':
         return handleGuildCommand(player, args);
       case 'territory':
@@ -769,19 +975,63 @@ Name is permanent (unless you buy a Name Change Card later).`;
 
 
 function formatWhatsNew(): string {
-  return `🆕 *WHAT'S NEW — v2.1.0*
+  return `🆕 *WHAT'S NEW — v2.0.0* ⚜️
 ━━━━━━━━━━━━━━━━━━━━
-• SYN platform: .menu game list
-• .configure syndicates|utility (max 2)
-• Konoha module — coming soon
-• Channel brand footer on menu
-• .utility 40+ tools · polished UI
-• .count number auto-deletes in 2s
-• .sticker download hardened
-• .guild · .territory · guild battle
-• .version · .botowner (Exodial)
+🧠 *SYNAI JUST LEVELED UP — THE BRAIN BEHIND THE STREETS GOT SMARTER*
+SynAI isn't just some glorified chatbot anymore — it's had a full neural overhaul, and the streets are about to feel it.
+
+⚡ *SIX-BRAIN FAILOVER SYSTEM*
+SynAI now runs on a full redundant intelligence stack — six independent AI cores wired in, so if one goes down, another picks up the second the first one blinks. No more dead air. This thing does NOT go offline.
+
+🎯 *FASTER. SHARPER. NO EXCUSES.*
+The offline brain still handles most of your day-to-day — instant, unlimited, zero wait. When it needs to think harder, SynAI taps a full external network of high-powered reasoning engines for real answers, not canned responses. Ask it: .synai
+
+👂 *SYNAI IS LISTENING — QUIETLY, SELECTIVELY, ALWAYS SHARP*
+Behind the scenes, SynAI's ears are getting better. Feedback, ideas, chatter — it's all feeding a system that learns what the Syndicate actually wants, faster than ever.
+
+🛡️ *THE HOUSE IS WATCHING*
+Let's just say — SynAI doesn't miss much anymore. What happens in the family, stays accounted for. SynAI now listens for active abusers and admin abuse.
+
 ━━━━━━━━━━━━━━━━━━━━
-.menu · .configure status · .utility`;
+🏛️ *CITY TAX SYSTEM — PAY UP OR GET TOASTED*
+The city takes its cut now:
+▸ 3% on every .pay transfer (≥$1k)
+▸ Up to 60% on biz collects — the bigger your empire, the harder they tax
+▸ 5% market fee on .biz buy · 5% duty on upgrades · 10% on contracts
+▸ .tax — see every rate and every dollar they've skimmed
+Money is leaving the economy. Adapt or stay broke.
+
+🚗 *VEHICLE SYSTEM — RIDE OR WALK*
+Garages, mileage, condition, appreciation. Muscle to supercars.
+▸ .vehicle list · .vehicle garage
+
+🎣 *FISCH — THE WATERS ARE LIVE*
+Rods, boats, zones, territories, rare catches. The reel is now a real fight —
+2 pulls to land it or lose it.
+▸ .fisch · .fish · .pull
+
+━━━━━━━━━━━━━━━━━━━━
+💧 *STREET DROPS — FIRST COME, FIRST CLAIMED*
+Every ~10 minutes a drop hits syndicates groups. One item, one winner.
+▸ .drops — what's on deck · .claim — grab it first
+16 drops in rotation — luck clovers, cash caches, cursed charms and worse.
+
+📬 *SUGGESTIONS — TALK TO THE HOUSE*
+Idea, gripe, or bug? Drop it and it lands in the group's library, where SynAI
+can actually read it.
+▸ .suggest <idea> · .suggest list · .suggest <n>
+
+🎓 *BRAND-NEW COMMUNITY — UNC (KONOHA)*
+There's a brand-new community now living inside SYN: *UNC (Konoha)*.
+Different crowd, different hustle — student crews, campus crime, academic grind.
+▸ .configure unc — enable it in your group
+_Status: In dev._
+
+━━━━━━━━━━━━━━━━━━━━
+*SYN v2.0.0 — Next Generation of Text Based Games*
+This is only the beginning. SynAI's not just answering questions anymore — it's becoming the actual Brain (core) of Syndicates. Buckle up.
+━━━━━━━━━━━━━━━━━━━━
+.menu · .synai · .tax · .vehicle · .fisch · .drops · .suggest`;
 }
 
 function formatStart(player: any): string {

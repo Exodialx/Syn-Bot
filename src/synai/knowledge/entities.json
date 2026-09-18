@@ -1,7 +1,7 @@
 {
   "entities": {
     "roles": ["mafia", "hitman", "businessman"],
-    "games": ["syndicates", "fisch", "konoha", "utility"],
+    "games": ["syndicates", "fisch", "unc", "utility"],
     "commands": [
       "start", "menu", "help", "profile", "daily", "bank", "deposit", "withdraw", "rob", "raid",
       "hit", "crime", "crypto", "shop", "buy", "inv", "equip", "role", "biz", "collect", "heist",

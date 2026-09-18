@@ -6,6 +6,7 @@ import { getDb, saveDb } from '../db/database.js';
 import { isPremium } from './shop.js';
 import { damageHeart, hospitalBlock } from './health.js';
 import { BUSINESS_CATALOG } from './businesses.js';
+import { applyContractTax, taxLine } from './tax.js';
 
 function now() { return Date.now(); }
 function dayKey(ts = Date.now()): string {
@@ -114,16 +115,18 @@ export function claimDailyJob(p: Player, raw: string): string {
   const prog = st.progress[job.id] || 0;
   if (prog < job.target) return `❌ Progress ${prog}/${job.target} — keep going.`;
   st.claimed.push(job.id);
-  p.cash += job.reward;
+  const tx = applyContractTax(p, job.reward); // city income tax on payouts
+  p.cash += tx.net;
   const notes = addXp(p, job.xp);
   if (p.role !== 'Unassigned') notes.push(...addClassXp(p, Math.floor(job.xp / 2), 'daily-job'));
   savePlayer(p);
   saveDb();
+  const tax = taxLine(tx);
   return `📋 *CONTRACT PAID*
 ━━━━━━━━━━━━━━━━━━━━
 ${job.title}
 💰 +$${job.reward.toLocaleString()}
-${notes.join('\n')}`;
+${tax ? tax + `\n▸ Net $${tx.net.toLocaleString()}\n` : ''}${notes.join('\n')}`;
 }
 
 // ─── Player bounties ──────────────────────────────────────────

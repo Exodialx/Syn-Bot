@@ -6,6 +6,7 @@ import { Player, savePlayer, addXp, addClassXp } from './player.js';
 import { illegalIncomeMult, addCityHeat } from './city.js';
 import { getDb, saveDb } from '../db/database.js';
 import { isPremium } from './shop.js';
+import { applyCollectTax, taxLine, applyPurchaseFee, applyUpgradeDuty } from './tax.js';
 
 const COLLECT_CD = 5 * 60 * 60 * 1000; // 5 hours — income accrues hourly
 const IDLE_CAP = 5 * 60 * 60 * 1000; // 5h accrual cap
@@ -88,8 +89,8 @@ export const BUSINESS_CATALOG: BizDef[] = [
   { id: 'private-clinic', name: 'Private Clinic', icon: '🏥', tier: 'legal', cost: 180000, baseIncome: 8000, heat: 0, cityHeat: 0, minLevel: 10 },
   { id: 'art-gallery', name: 'Art Gallery Front', icon: '🖼️', tier: 'grey', cost: 220000, baseIncome: 11000, heat: 2, cityHeat: 1, minLevel: 10 },
   { id: 'import-export', name: 'Import/Export Desk', icon: '📦', tier: 'grey', cost: 300000, baseIncome: 15000, heat: 3, cityHeat: 2, minLevel: 12 },
-  { id: 'loan-shark-office', name: 'Loan Shark Office', icon: '💸', tier: 'grey', cost: 380000, baseIncome: 19000, heat: 4, cityHeat: 2, minLevel: 13 },
-  { id: 'chop-shop', name: 'Chop Shop', icon: '🚙', tier: 'grey', cost: 450000, baseIncome: 23000, heat: 5, cityHeat: 3, minLevel: 14 },
+  { id: 'vigorish-desk', name: 'Vigorish Desk', icon: '💸', tier: 'grey', cost: 380000, baseIncome: 19000, heat: 4, cityHeat: 2, minLevel: 13 },
+  { id: 'parts-mill', name: 'Parts Mill', icon: '🚙', tier: 'grey', cost: 450000, baseIncome: 23000, heat: 5, cityHeat: 3, minLevel: 14 },
   { id: 'counterfeit-press', name: 'Counterfeit Press', icon: '💵', tier: 'criminal', cost: 650000, baseIncome: 38000, heat: 9, cityHeat: 5, minLevel: 16 },
   { id: 'smuggle-railway', name: 'Smuggle Railway', icon: '🚂', tier: 'criminal', cost: 1100000, baseIncome: 68000, heat: 8, cityHeat: 5, minLevel: 18 },
   { id: 'data-brokers', name: 'Data Broker Ring', icon: '📡', tier: 'criminal', cost: 1500000, baseIncome: 88000, heat: 6, cityHeat: 3, minLevel: 19 },
@@ -125,7 +126,54 @@ export const BUSINESS_CATALOG: BizDef[] = [
   { id: 'marina', name: 'Marina & Docks', icon: '⚓', tier: 'property', cost: 1500000, baseIncome: 85000, heat: 0, cityHeat: 0, minLevel: 19, exclusive: 'Businessman' },
   { id: 'airport-hangar', name: 'Airport Hangar', icon: '✈️', tier: 'property', cost: 2500000, baseIncome: 140000, heat: 0, cityHeat: 0, minLevel: 22, exclusive: 'Businessman' },
   { id: 'oil-platform', name: 'Offshore Oil Platform', icon: '🛢️', tier: 'property', cost: 4000000, baseIncome: 220000, heat: 0, cityHeat: 0, minLevel: 24, exclusive: 'Businessman' },
-  { id: 'pmc-compound', name: 'Private Military Compound', icon: '🏰', tier: 'property', cost: 6000000, baseIncome: 320000, heat: 0, cityHeat: 0, minLevel: 26, exclusive: 'Businessman' }
+  { id: 'pmc-compound', name: 'Private Military Compound', icon: '🏰', tier: 'property', cost: 6000000, baseIncome: 320000, heat: 0, cityHeat: 0, minLevel: 26, exclusive: 'Businessman' },
+
+  // ── EXPANSION II — 40 new fronts (street to spaceport) ──
+  // legal starters & mid-tier
+  { id: 'vending-net', name: 'Vending Machine Network', icon: '🥤', tier: 'legal', cost: 6000, baseIncome: 300, heat: 0, cityHeat: 0, minLevel: 1 },
+  { id: 'dog-grooming', name: 'Dog Grooming Salon', icon: '🐩', tier: 'legal', cost: 9000, baseIncome: 450, heat: 0, cityHeat: 0, minLevel: 1 },
+  { id: 'coffee-kiosk', name: 'Coffee Kiosk', icon: '☕', tier: 'legal', cost: 11000, baseIncome: 520, heat: 0, cityHeat: 0, minLevel: 1 },
+  { id: 'phone-repair', name: 'Phone Repair Bench', icon: '📱', tier: 'legal', cost: 14000, baseIncome: 700, heat: 0, cityHeat: 0, minLevel: 2 },
+  { id: 'tattoo-parlor', name: 'Tattoo Parlor', icon: '🖋️', tier: 'legal', cost: 17000, baseIncome: 850, heat: 0, cityHeat: 0, minLevel: 2 },
+  { id: 'thrift-store', name: 'Thrift & Vintage Store', icon: '🧥', tier: 'legal', cost: 21000, baseIncome: 1050, heat: 0, cityHeat: 0, minLevel: 2 },
+  { id: 'bakery', name: 'Artisan Bakery', icon: '🥐', tier: 'legal', cost: 26000, baseIncome: 1300, heat: 0, cityHeat: 0, minLevel: 3 },
+  { id: 'car-detailing', name: 'Detailing Studio', icon: '🧽', tier: 'legal', cost: 33000, baseIncome: 1600, heat: 0, cityHeat: 0, minLevel: 3 },
+  { id: 'pet-hotel', name: 'Pet Hotel & Spa', icon: '🐾', tier: 'legal', cost: 48000, baseIncome: 2400, heat: 0, cityHeat: 0, minLevel: 4 },
+  { id: 'craft-brewery', name: 'Craft Brewery', icon: '🍺', tier: 'legal', cost: 65000, baseIncome: 3200, heat: 0, cityHeat: 0, minLevel: 5 },
+  // grey market
+  { id: 'karaoke-bar', name: 'Karaoke Bar', icon: '🎤', tier: 'grey', cost: 95000, baseIncome: 5000, heat: 1, cityHeat: 0, minLevel: 7 },
+  { id: 'vape-lounge', name: 'Vape Lounge', icon: '💨', tier: 'grey', cost: 110000, baseIncome: 5800, heat: 2, cityHeat: 1, minLevel: 7 },
+  { id: 'ticket-scalp', name: 'Ticket Scalping Desk', icon: '🎟️', tier: 'grey', cost: 130000, baseIncome: 6800, heat: 2, cityHeat: 1, minLevel: 8 },
+  { id: 'jewelry-fence', name: 'Jewelry Fencing Front', icon: '💎', tier: 'grey', cost: 150000, baseIncome: 7800, heat: 3, cityHeat: 1, minLevel: 8 },
+  { id: 'gem-smuggle', name: 'Gem Smuggling Route', icon: '💠', tier: 'grey', cost: 190000, baseIncome: 10500, heat: 4, cityHeat: 2, minLevel: 9 },
+  { id: 'rare-wine-cellar', name: 'Rare Wine Cellar', icon: '🍷', tier: 'grey', cost: 230000, baseIncome: 12500, heat: 3, cityHeat: 1, minLevel: 10 },
+  { id: 'organ-broker', name: 'Organ Broker Ring', icon: '🫀', tier: 'grey', cost: 270000, baseIncome: 15000, heat: 6, cityHeat: 3, minLevel: 11, flagged: true },
+  { id: 'antiquities', name: 'Antiquities Laundering', icon: '🏺', tier: 'grey', cost: 310000, baseIncome: 17000, heat: 3, cityHeat: 2, minLevel: 12 },
+  { id: 'wildlife-trade', name: 'Exotic Wildlife Trade', icon: '🐍', tier: 'grey', cost: 350000, baseIncome: 19500, heat: 6, cityHeat: 4, minLevel: 12, flagged: true },
+  { id: 'blood-diamond', name: 'Blood Diamond Syndicate', icon: '💍', tier: 'grey', cost: 420000, baseIncome: 24000, heat: 5, cityHeat: 3, minLevel: 13 },
+  // criminal enterprise
+  { id: 'stolen-auto-line', name: 'Stolen Auto Line', icon: '🚘', tier: 'criminal', cost: 550000, baseIncome: 33000, heat: 9, cityHeat: 6, minLevel: 15 },
+  { id: 'meth-biker', name: 'Biker Meth Circuit', icon: '🏍️', tier: 'criminal', cost: 650000, baseIncome: 39000, heat: 11, cityHeat: 7, minLevel: 16 },
+  { id: 'arms-airdrop', name: 'Arms Airdrop Network', icon: '🪂', tier: 'criminal', cost: 750000, baseIncome: 45000, heat: 9, cityHeat: 6, minLevel: 16 },
+  { id: 'port-cartel', name: 'Harbor Cartel Pier', icon: '🛳️', tier: 'criminal', cost: 850000, baseIncome: 51000, heat: 11, cityHeat: 7, minLevel: 17 },
+  { id: 'assassin-guild', name: 'Assassin Guild Hall', icon: '🗡️', tier: 'criminal', cost: 1100000, baseIncome: 66000, heat: 8, cityHeat: 5, minLevel: 18 },
+  { id: 'counter-intel', name: 'Counter-Intel Cell', icon: '🕵️', tier: 'criminal', cost: 1300000, baseIncome: 76000, heat: 6, cityHeat: 4, minLevel: 19 },
+  { id: 'narco-airline', name: 'Narco Air Bridge', icon: '🛩️', tier: 'criminal', cost: 1700000, baseIncome: 95000, heat: 12, cityHeat: 8, minLevel: 20 },
+  { id: 'rogue-state-deal', name: 'Rogue State Brokerage', icon: '🌍', tier: 'criminal', cost: 3500000, baseIncome: 175000, heat: 9, cityHeat: 6, minLevel: 23 },
+  // digital
+  { id: 'sim-swap', name: 'SIM Swap Crew', icon: '📶', tier: 'digital', cost: 160000, baseIncome: 9500, heat: 2, cityHeat: 0, minLevel: 10 },
+  { id: 'crypto-mixer', name: 'Crypto Mixer Service', icon: '🌪️', tier: 'digital', cost: 280000, baseIncome: 17000, heat: 3, cityHeat: 0, minLevel: 12 },
+  { id: 'game-item-launder', name: 'Game Item Laundering', icon: '🎮', tier: 'digital', cost: 340000, baseIncome: 21000, heat: 3, cityHeat: 0, minLevel: 12 },
+  { id: 'deepfake-scam', name: 'Deepfake Scam Call Center', icon: '☎️', tier: 'digital', cost: 550000, baseIncome: 35000, heat: 4, cityHeat: 0, minLevel: 14 },
+  { id: 'quantum-vault', name: 'Quantum Vault Cracking', icon: '🧿', tier: 'digital', cost: 800000, baseIncome: 50000, heat: 5, cityHeat: 0, minLevel: 15 },
+  { id: 'ai-ponzi', name: 'AI Hedge Ponzi', icon: '📉', tier: 'digital', cost: 1200000, baseIncome: 72000, heat: 4, cityHeat: 0, minLevel: 18 },
+  { id: 'orbital-jam', name: 'Orbital Comms Jamming', icon: '🛸', tier: 'digital', cost: 3000000, baseIncome: 155000, heat: 6, cityHeat: 0, minLevel: 23 },
+  // property (Businessman exclusive)
+  { id: 'student-housing', name: 'Student Housing Block', icon: '🛏️', tier: 'property', cost: 300000, baseIncome: 17000, heat: 0, cityHeat: 0, minLevel: 13, exclusive: 'Businessman' },
+  { id: 'shopping-mall', name: 'Shopping Mall', icon: '🛍️', tier: 'property', cost: 700000, baseIncome: 38000, heat: 0, cityHeat: 0, minLevel: 16, exclusive: 'Businessman' },
+  { id: 'vineyard-estate', name: 'Vineyard Estate', icon: '🍇', tier: 'property', cost: 1800000, baseIncome: 100000, heat: 0, cityHeat: 0, minLevel: 20, exclusive: 'Businessman' },
+  { id: 'ski-resort', name: 'Ski Resort & Spa', icon: '⛷️', tier: 'property', cost: 4500000, baseIncome: 260000, heat: 0, cityHeat: 0, minLevel: 24, exclusive: 'Businessman' },
+  { id: 'spaceport', name: 'Private Spaceport', icon: '🚀', tier: 'property', cost: 15000000, baseIncome: 750000, heat: 0, cityHeat: 0, minLevel: 30, exclusive: 'Businessman', unique: true }
 ];
 
 /** Per-player business runtime: level + last earn timestamp */
@@ -291,7 +339,11 @@ export function buyBusiness(p: Player, id: string): string {
   }
   if (p.cash < biz.cost) return `❌ Need $${biz.cost.toLocaleString()}`;
 
-  p.cash -= biz.cost;
+  // City market registration fee (5%) — pays on top of the sticker price
+  const fee = applyPurchaseFee(p, biz.cost);
+  if (p.cash < fee.net) return `❌ Need $${fee.net.toLocaleString()} ($${biz.cost.toLocaleString()} + $${fee.tax.toLocaleString()} ${fee.ratePct}% city fee)`;
+
+  p.cash -= fee.net;
   p.businesses.push(biz.id);
   const rt = getRuntime(p);
   rt[biz.id] = { level: 1, lastEarn: Date.now(), insured: false };
@@ -304,10 +356,11 @@ export function buyBusiness(p: Player, id: string): string {
   if (p.role === 'Businessman') notes.push(...addClassXp(p, Math.floor(biz.cost / 2000), 'biz'));
   savePlayer(p);
   saveRuntime();
+  const feeLine = fee.tax > 0 ? `City fee (${fee.ratePct}%) $${fee.tax.toLocaleString()}\n` : '';
   return `▸ *PURCHASED* ${biz.icon} ${biz.name} (\`${codeForBiz(biz)}\`)
 ━━━━━━━━━━━━━━━━━━━━
 Cost $${biz.cost.toLocaleString()}
-Income ~$${biz.baseIncome}/collect
+${feeLine}Income ~$${biz.baseIncome}/collect
 ${notes.join('\n')}`.trim();
 }
 
@@ -319,17 +372,19 @@ export function upgradeBusiness(p: Player, id: string): string {
   const state = rt[biz.id] || { level: 1, lastEarn: Date.now(), insured: false };
   if (state.level >= 3) return '❌ Already Level 3.';
   const cost = upgradeCost(biz, state.level);
-  if (p.cash < cost) return `❌ Need $${cost.toLocaleString()} for Level ${state.level + 1}`;
-  p.cash -= cost;
+  const duty = applyUpgradeDuty(p, cost);
+  if (p.cash < duty.net) return `❌ Need $${duty.net.toLocaleString()} ($${cost.toLocaleString()} + $${duty.tax.toLocaleString()} duty) for Level ${state.level + 1}`;
+  p.cash -= duty.net;
   state.level += 1;
   rt[biz.id] = state;
   const perk = state.level === 3 && PERKS[biz.id] ? `\nPerk: ${PERKS[biz.id]}` : '';
+  const dutyLine = duty.tax > 0 ? `Duty (${duty.ratePct}%) $${duty.tax.toLocaleString()}\n` : '';
   savePlayer(p);
   saveRuntime();
   return `▸ *UPGRADED* ${biz.icon} ${biz.name} → L${state.level}
 ━━━━━━━━━━━━━━━━━━━━
 −$${cost.toLocaleString()}
-Income now ~$${incomeFor(biz, state.level, p).toLocaleString()}/collect${perk}`;
+${dutyLine}Income now ~$${incomeFor(biz, state.level, p).toLocaleString()}/collect${perk}`;
 }
 
 export function insureBusiness(p: Player, id: string): string {
@@ -394,7 +449,9 @@ export function collectBusinesses(p: Player): string {
     lines.unshift('⚠️ Raid damage — income cut 45% this cycle');
     (p as any).raidDebuffUntil = 0; // cleared after collect
   }
-  p.cash += total;
+  // City tax on business income — hits biz owners at collect time
+  const tax = applyCollectTax(p, total);
+  p.cash += tax.net;
   // legal fronts slowly reduce heat
   const legalCount = p.businesses.filter(id => BUSINESS_CATALOG.find(b => b.id === id)?.tier === 'legal').length;
   if (legalCount > 0) p.heat = Math.max(0, p.heat - Math.min(5, legalCount));
@@ -410,7 +467,7 @@ export function collectBusinesses(p: Player): string {
 ${lines.slice(0, 14).join('\n')}
 ${lines.length > 14 ? `… +${lines.length - 14} more\n` : ''}━━━━━━━━━━━━━━━━━━━━
 TOTAL $${total.toLocaleString()}
-${heat ? `🔥 Heat +${heat}\n` : ''}💰 Cash $${p.cash.toLocaleString()}
+${tax.tax > 0 ? taxLine(tax, 'tax') + `\n▸ Net payout $${tax.net.toLocaleString()}\n` : ''}${heat ? `🔥 Heat +${heat}\n` : ''}💰 Cash $${p.cash.toLocaleString()}
 ${notes.join('\n')}`.trim();
 }
 

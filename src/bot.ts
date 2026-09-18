@@ -1,3 +1,4 @@
+import './config/env.js'; // loads git-ignored .env FIRST (OPENROUTER_API_KEY etc.)
 import {
   startWhatsApp,
   setMessageHandler,
@@ -9,6 +10,7 @@ import {
   sendWithAchievementsLb,
   sendWithStore,
   sendWithCrypto,
+  sendWithMenu,
   deleteMessage,
   sendImageFile,
   sendStickerBuffer,
@@ -19,9 +21,11 @@ import {
 import { startQrServer } from './connection/qrServer.js';
 import { runLoadingAnimation, finalizeWithEdit } from './connection/loadingAnimation.js';
 import { startSynAILearning, tryLiveSkills } from './synai/synai.js';
-import { lastAiSource, callGeminiLive, logLiveBoostEnvStatus, liveBoostRemaining, recordLiveBoostUse, LIVE_BOOST_DAILY_LIMIT } from './game/ai.js';
+import { ingestGroupMessage, lastAbuseEntry, getGroupSynAI } from './synai/listening.js';
+import { lastAiSource, callOpenRouterLive, logLiveBoostEnvStatus, liveBoostRemaining, recordLiveBoostUse, LIVE_BOOST_DAILY_LIMIT, formatAiAnswer } from './game/ai.js';
 import { getOrCreatePlayer, linkIdentities } from './game/player.js';
-import { isAdmin } from './game/admin.js';
+import { isAdmin, isBotOwner } from './game/admin.js';
+import { startDrops } from './game/drops.js';
 import { handleCommand } from './commands/handler.js';
 import {
   shouldDeleteForAntiword,
@@ -667,7 +671,96 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
 
 
   // Game commands
+  // Spec S2: group listening runs BEFORE the dot-command gate so plain chat is captured.
+  if (text && !text.startsWith('.')) {
+    if (chatJid?.endsWith('@g.us')) {
+      try {
+        const hit = ingestGroupMessage(chatJid, canonicalId || senderId, text);
+        if (hit === 'abuse') {
+          const entry = lastAbuseEntry(chatJid);
+          const allIds = Object.keys((_db.players || {}) as Record<string, any>);
+          // Abuse alerts go to the bot owner first (only they can clear the buffer);
+          // fall back to all admins if no owner is registered yet.
+          const ownerIds = allIds.filter((id) => _db.players[id]?.isBotOwner);
+          const adminIds = ownerIds.length ? ownerIds : allIds.filter((id) => _db.players[id]?.isAdmin);
+          let hist = '';
+          if (entry?.flaggedAdmin) {
+            try {
+              const since = Date.now() - 30 * 60 * 1000;
+              const rows = ((_db.command_log || []) as any[]).filter((r) => String(r.player_id) === String(entry.flaggedAdmin) && r.created_at >= since).slice(-15);
+              hist = rows.length ? '\nLast 30m cmds:\n' + rows.map((r) => `${new Date(r.created_at).toLocaleTimeString()} .${r.command}${r.args ? ' ' + r.args : ''}`).join('\n') : '\nNo commands from that admin in last 30m.';
+            } catch { hist = ''; }
+          }
+          const dm = `🚨 *ABUSE FLAG* · ${chatJid}\n━━━━━━━━━━━━━━━━━━━━\nFrom ...${(entry?.sender || senderId).slice(-6)} @ ${new Date(entry?.timestamp || Date.now()).toLocaleString()}\n${entry?.flaggedAdmin ? `Flagged admin: ${entry.flaggedAdmin}\n` : ''}"${(entry?.text || text).slice(0, 600)}"${hist}\n━━━━━━━━━━━━━━━━━━━━\n.synai abuse log (in group) · .synai abuse clear`;
+          for (const aid of adminIds) {
+            try { await sock.sendMessage(`${String(aid).replace(/[^0-9]/g, '')}@s.whatsapp.net`, { text: dm }); } catch { /* next admin */ }
+          }
+        }
+      } catch { /* listening never breaks chat */ }
+    }
+  }
   if (!text || !text.startsWith('.')) return;
+
+  // Spec S2/S3 handlers live BEFORE the platform gate (admin ops tools
+  // must work even in locked groups). Plain .synai Q&A still flows below.
+  if (cmd === '.gcbrief' || /^\.synai\s+ops\b/i.test(text)) {
+    if (!isBotOwner(canonicalId || senderId)) { await sendText(chatJid, '⛔ Bot owner only.', raw); return; }
+    if (cmd === '.gcbrief') {
+      const { getGroupSynAI, flushDigestBuffer } = await import('./synai/listening.js');
+      const g0 = getGroupSynAI(chatJid);
+      if (!g0.buffers.digest.length) { await sendText(chatJid, '📭 Digest buffer is empty. Turn on listening: .synai listen', raw); return; }
+      let gcWorking = true;
+      const animP = runLoadingAnimation(sock, chatJid, raw, { keepAlive: () => gcWorking });
+      try {
+        const entries = flushDigestBuffer(chatJid);
+        const byCat: Record<string, typeof entries> = {};
+        for (const e of entries) { (byCat[e.category] = byCat[e.category] || []).push(e); }
+        const briefSrc = entries.slice(-60).map((e) => `[${e.category}] ...${e.sender.slice(-4)}: ${e.text}`).join('\n');
+        const { callBoostAI } = await import('./synai/boost.js');
+        const summary = await callBoostAI(`Summarize these group chat messages for the game owner. Group into: bugs, complaints, praise, featureRequests. Be tight and conversational (WhatsApp). Messages:\n${briefSrc}`, { timeoutMs: 15000 });
+        const out = summary ? `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n${summary}` : `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n` + Object.entries(byCat).map(([c, rows]) => `*${c}* (${rows.length})\n` + rows.slice(0, 8).map((r) => `▸ ...${r.sender.slice(-4)}: ${r.text.slice(0, 140)}`).join('\n')).join('\n\n');
+        gcWorking = false;
+        const k = await animP;
+        await finalizeWithEdit(sock, chatJid, k, out, raw);
+      } catch (e) { gcWorking = false; console.error('gcbrief failed', e); await sendText(chatJid, '⚠️ Brief failed, buffer kept.', raw); }
+      return;
+    }
+    // .synai ops
+    const q = text.replace(/^\.synai\s+ops\b/i, '').trim() || 'Give me a quick ops status.';
+    let opsWorking = true;
+    const animP2 = runLoadingAnimation(sock, chatJid, raw, { keepAlive: () => opsWorking });
+    try {
+      const { getAllPlayers } = await import('./game/player.js');
+      const { calcEconomyHealth } = await import('./game/admin.js');
+      const tl = q.toLowerCase();
+      let slice = '';
+      if (/\b(player|user|@\d|p\d{3,})\b/.test(tl)) {
+        const all = getAllPlayers();
+        const hit = all.find((p: any) => tl.includes(String(p.id)) || (p.name && tl.includes(p.name.toLowerCase())));
+        slice = hit ? `PLAYER ${(hit as any).name || hit.id}: id=${hit.id} lvl=${hit.level} cash=${hit.cash} bank=${hit.bank} role=${hit.role} banned=${hit.banned} admin=${hit.isAdmin}` : `Players: ${all.length} total. No direct match — showing totals.`;
+      } else if (/\b(econom|money|cash|bank|circulation)\b/.test(tl)) {
+        const e = calcEconomyHealth();
+        slice = `ECONOMY: players=${e.players} cash=${e.totalCash} bank=${e.totalBank} net=${e.totalNet} est=${e.estimated} status=${e.status} avgNet=${e.avgNet}`;
+      } else if (/\b(cmd|command|log|activity)\b/.test(tl)) {
+        const rows = ((_db.command_log || []) as any[]).slice(-15).map((r) => `${new Date(r.created_at).toLocaleTimeString()} ${String(r.player_id).slice(-6)} .${r.command}${r.args ? ' ' + r.args : ''}`).join('\n');
+        slice = `RECENT COMMANDS:\n${rows || 'none'}`;
+      } else if (/\b(digest|group|listen|gc)\b/.test(tl)) {
+        const { getGroupSynAI: gg } = await import('./synai/listening.js');
+        const gs = gg(chatJid);
+        slice = `GROUP ${chatJid}: digest=${gs.listening.digest ? 'ON' : 'OFF'} (${gs.buffers.digest.length}) abuse=${gs.listening.abuse ? 'ON' : 'OFF'} (${gs.buffers.abuse.length})`;
+      } else {
+        const e = calcEconomyHealth();
+        slice = `QUICK STATUS: players=${e.players} net=${e.totalNet} status=${e.status} cmds=${(_db.command_log || []).length}`;
+      }
+      const { callBoostAI } = await import('./synai/boost.js');
+      const OPS_SYS = `You are SynAI, the internal ops assistant for SynBot — a WhatsApp economy/crime MMO game called "Syndicates." You are speaking privately and directly with the bot's owner/admin, not with a player. This is a trusted, one-on-one operational channel.\n\nYour job here is to help the owner understand and manage the live game: player database lookups, economy health, command logs, bug/error context, and group chat digest summaries — using only the data provided to you in this turn.\n\nBehave like a sharp, no-nonsense ops manager, not a customer-support bot. Give real numbers when asked, not vague summaries. If something looks off — a stat spike, a suspicious command pattern, a repeated error — say so plainly and proactively. Keep answers tight and conversational, this is WhatsApp, not a report; no headers or bullet dumps unless asked for a breakdown. Never use player-facing game flavor text or persona here — this is backstage. If you don't have data to answer something, say so directly instead of guessing.`;
+      const ans = await callBoostAI(`DATA:\n${slice.slice(0, 3000)}\n\nOWNER QUESTION: ${q}`, { systemPrompt: OPS_SYS, timeoutMs: 15000 });
+      opsWorking = false;
+      const k2 = await animP2;
+      await finalizeWithEdit(sock, chatJid, k2, ans || `⚠️ Ops brain unreachable. Raw slice:\n${slice.slice(0, 1500)}`, raw);
+    } catch (e) { opsWorking = false; console.error('ops failed', e); await sendText(chatJid, '⚠️ Ops failed.', raw); }
+    return;
+  }
 
   // platform gate
   const bareCmd = cmd.replace(/^\./, '');
@@ -684,39 +777,128 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
     return;
   }
 
-  // ── SynAI: RanAI-style loading animation while the brain computes ──
+  // Spec S2: .gcbrief — one boost-tier call summarizing the digest buffer, then clear.
+  if (cmd === '.gcbrief') {
+    const { getGroupSynAI, flushDigestBuffer } = await import('./synai/listening.js');
+    if (!isAdmin(canonicalId || senderId)) { await sendText(chatJid, '⛔ Admin only.', raw); return; }
+    const g0 = getGroupSynAI(chatJid);
+    if (!g0.buffers.digest.length) { await sendText(chatJid, '📭 Digest buffer is empty. Turn on listening: .synai listen', raw); return; }
+    let gcWorking = true;
+    const animP = runLoadingAnimation(sock, chatJid, raw, { keepAlive: () => gcWorking });
+    try {
+      const entries = flushDigestBuffer(chatJid);
+      const byCat: Record<string, typeof entries> = {};
+      for (const e of entries) { (byCat[e.category] = byCat[e.category] || []).push(e); }
+      const briefSrc = entries.slice(-60).map((e) => `[${e.category}] ...${e.sender.slice(-4)}: ${e.text}`).join('\n');
+      const { callBoostAI } = await import('./synai/boost.js');
+      const summary = await callBoostAI(`Summarize these group chat messages for the game owner. Group into: bugs, complaints, praise, featureRequests. Be tight and conversational (WhatsApp). Messages:\n${briefSrc}`, { timeoutMs: 15000 });
+      const out = summary ? `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n${summary}` : `📝 *GC BRIEF* (${entries.length} msgs)\n━━━━━━━━━━━━━━━━━━━━\n` + Object.entries(byCat).map(([c, rows]) => `*${c}* (${rows.length})\n` + rows.slice(0, 8).map((r) => `▸ ...${r.sender.slice(-4)}: ${r.text.slice(0, 140)}`).join('\n')).join('\n\n');
+      gcWorking = false;
+      const k = await animP;
+      await finalizeWithEdit(sock, chatJid, k, out, raw);
+    } catch (e) { gcWorking = false; console.error('gcbrief failed', e); await sendText(chatJid, '⚠️ Brief failed, buffer kept.', raw); }
+    return;
+  }
+
+  // Spec S3: .synai ops — admin personal assistant (unlimited, never capped).
+  if (/^\.synai\s+ops\b/i.test(text)) {
+    if (!isBotOwner(canonicalId || senderId)) { await sendText(chatJid, '⛔ Bot owner only.', raw); return; }
+    const q = text.replace(/^\.synai\s+ops\b/i, '').trim() || 'Give me a quick ops status.';
+    let opsWorking = true;
+    const animP2 = runLoadingAnimation(sock, chatJid, raw, { keepAlive: () => opsWorking });
+    try {
+      const { getAllPlayers } = await import('./game/player.js');
+      const { calcEconomyHealth } = await import('./game/admin.js');
+      const tl = q.toLowerCase();
+      let slice = '';
+      if (/\b(player|user|@\d|p\d{3,})\b/.test(tl)) {
+        const all = getAllPlayers();
+        const hit = all.find((p: any) => tl.includes(String(p.id)) || (p.name && tl.includes(p.name.toLowerCase())));
+        slice = hit ? `PLAYER ${(hit as any).name || hit.id}: id=${hit.id} lvl=${hit.level} cash=${hit.cash} bank=${hit.bank} role=${hit.role} banned=${hit.banned} admin=${hit.isAdmin}` : `Players: ${all.length} total. No direct match — showing totals.`;
+      } else if (/\b(econom|money|cash|bank|circulation)\b/.test(tl)) {
+        const e = calcEconomyHealth();
+        slice = `ECONOMY: players=${e.players} cash=${e.totalCash} bank=${e.totalBank} net=${e.totalNet} est=${e.estimated} status=${e.status} avgNet=${e.avgNet}`;
+      } else if (/\b(cmd|command|log|activity)\b/.test(tl)) {
+        const rows = ((_db.command_log || []) as any[]).slice(-15).map((r) => `${new Date(r.created_at).toLocaleTimeString()} ${String(r.player_id).slice(-6)} .${r.command}${r.args ? ' ' + r.args : ''}`).join('\n');
+        slice = `RECENT COMMANDS:\n${rows || 'none'}`;
+      } else if (/\b(digest|group|listen|gc)\b/.test(tl)) {
+        const { getGroupSynAI: gg } = await import('./synai/listening.js');
+        const gs = gg(chatJid);
+        slice = `GROUP ${chatJid}: digest=${gs.listening.digest ? 'ON' : 'OFF'} (${gs.buffers.digest.length}) abuse=${gs.listening.abuse ? 'ON' : 'OFF'} (${gs.buffers.abuse.length})`;
+      } else {
+        const e = calcEconomyHealth();
+        slice = `QUICK STATUS: players=${e.players} net=${e.totalNet} status=${e.status} cmds=${(_db.command_log || []).length}`;
+      }
+      const { callBoostAI } = await import('./synai/boost.js');
+      const OPS_SYS = `You are SynAI, the internal ops assistant for SynBot — a WhatsApp economy/crime MMO game called "Syndicates." You are speaking privately and directly with the bot's owner/admin, not with a player. This is a trusted, one-on-one operational channel.\n\nYour job here is to help the owner understand and manage the live game: player database lookups, economy health, command logs, bug/error context, and group chat digest summaries — using only the data provided to you in this turn.\n\nBehave like a sharp, no-nonsense ops manager, not a customer-support bot. Give real numbers when asked, not vague summaries. If something looks off — a stat spike, a suspicious command pattern, a repeated error — say so plainly and proactively. Keep answers tight and conversational, this is WhatsApp, not a report; no headers or bullet dumps unless asked for a breakdown. Never use player-facing game flavor text or persona here — this is backstage. If you don't have data to answer something, say so directly instead of guessing.`;
+      const ans = await callBoostAI(`DATA:\n${slice.slice(0, 3000)}\n\nOWNER QUESTION: ${q}`, { systemPrompt: OPS_SYS, timeoutMs: 15000 });
+      opsWorking = false;
+      const k2 = await animP2;
+      await finalizeWithEdit(sock, chatJid, k2, ans || `⚠️ Ops brain unreachable. Raw slice:\n${slice.slice(0, 1500)}`, raw);
+    } catch (e) { opsWorking = false; console.error('ops failed', e); await sendText(chatJid, '⚠️ Ops failed.', raw); }
+    return;
+  }
+
+  // ── SynAI: the loading animation runs WHILE the brain computes, so the
+  //    slower pacing costs no extra wall-clock time before the answer lands. ──
   if ((cmd === '.synai' || cmd === '.ai' || cmd === '.ask') && args.length) {
-    const animKey = await runLoadingAnimation(sock, chatJid, raw);
-    let aiReply = await handleCommand(canonicalId || senderId, text, { isGroup, mentioned, chatJid });
-    // Live upgrade: if the offline brain fell back, try (in order)
-    // 1) free live skills (weather/translate), then 2) the OpenRouter
-    // live boost (free DeepSeek tier) — the ONLY tier that's capped per-day.
-    if (aiReply) {
-      const question = args.join(' ');
-      // Use the source cached by askAi() — re-running the engine here would
+    const question = args.join(' ').trim();
+    // `.synai good|bad` is a local rating — answer instantly, no animation.
+    const isRating = /^(good|bad)$/i.test(args[0] || '');
+
+    let stillWorking = true;
+    const animKeyPromise: Promise<any | null> = isRating
+      ? Promise.resolve(null)
+      : runLoadingAnimation(sock, chatJid, raw, { keepAlive: () => stillWorking });
+
+    let aiReply: string | null = null;
+    try {
+      aiReply = await handleCommand(canonicalId || senderId, text, { isGroup, mentioned, chatJid });
+
+      // Live upgrade: if the offline brain fell back, try (in order)
+      // 1) free live skills (weather/translate), then 2) the OpenRouter
+      // live boost (`openrouter/free` auto-router) — the ONLY per-day-capped tier.
+      // The source cached by askAi() is used here: re-running the engine would
       // record the same turn twice (conversation memory + gap tracking).
-      if (lastAiSource(playerId) === 'fallback') {
+      if (aiReply && lastAiSource(playerId) === 'fallback') {
+        const player = getOrCreatePlayer(playerId);
         const live = await tryLiveSkills(question);
         if (live) {
-          aiReply = `🧠 *SYN AI* · _live feed_\n▸ ${live}\n\n_free live source_`;
+          aiReply = formatAiAnswer({
+            answer: live,
+            tier: 'live-skill',
+            question,
+            note: '_▸ live feed · free source (weather / translate)_',
+          });
         } else {
-          const player = getOrCreatePlayer(playerId);
           const remaining = liveBoostRemaining(player);
           if (remaining > 0) {
-            const liveAnswer = await callGeminiLive(question);
+            const liveAnswer = await callOpenRouterLive(question, {
+              name: player?.usernameSet && player?.name ? player.name : undefined,
+              role: player?.role !== 'Unassigned' ? player?.role : undefined,
+            });
             if (liveAnswer) {
               recordLiveBoostUse(player);
               const left = player.isAdmin ? '∞' : String(liveBoostRemaining(player));
-              aiReply = `🧠 *SYN AI* · _live boost 🔮_\n▸ ${liveAnswer}\n\n_${left} live boost${left === '1' ? '' : 's'} left today_`;
+              aiReply = formatAiAnswer({
+                answer: liveAnswer,
+                tier: 'live-boost',
+                question,
+                note: `_▸ ${left} live boost${left === '1' ? '' : 's'} left today_`,
+              });
             }
             // if the live boost call fails for any reason, aiReply stays as
-            // the offline fallback — no quota burned, no broken response.
+            // the offline card — no quota burned, no broken response.
           } else {
-            aiReply += `\n\n🔒 Live boost used up for today (${LIVE_BOOST_DAILY_LIMIT}/${LIVE_BOOST_DAILY_LIMIT}).\n🧠 Buy an AI Token in .shop to refill, or it resets at 00:00 UTC.`;
+            aiReply += `\n\n🔒 _Live boost used up for today (${LIVE_BOOST_DAILY_LIMIT}/${LIVE_BOOST_DAILY_LIMIT}) · buy an AI Token in .shop, or wait for the 00:00 UTC reset._`;
           }
         }
       }
+    } finally {
+      stillWorking = false;
     }
+
+    const animKey = await animKeyPromise;
     if (!aiReply) return;
     await finalizeWithEdit(sock, chatJid, animKey, aiReply, raw);
     return;
@@ -739,7 +921,12 @@ if (cmd === '.del' || cmd === '.delete' || cmd === '.delete') {
     return;
   }
 
-  if (cmd === '.start' || cmd === '.menu' || cmd === '.help' || lower.startsWith('.guide') || lower.startsWith('.story')) {
+  // Menu messages carry the assets image (falls back to plain text if missing).
+  if (cmd === '.start' || cmd === '.menu' || cmd === '.games' || cmd === '.syn') {
+    await sendWithMenu(chatJid, reply, raw);
+    return;
+  }
+  if (cmd === '.help' || lower.startsWith('.guide') || lower.startsWith('.story')) {
     await sendText(chatJid, reply, raw, { channelBrand: true });
     return;
   }
@@ -782,6 +969,9 @@ logLiveBoostEnvStatus();
 
 // SynAI background learning (hourly auto-learn + gap fill, unref'd timers)
 startSynAILearning();
+
+// Street drops — every 10 min a random item drops to syndicates-enabled groups
+startDrops();
 
 startWhatsApp().catch((err) => {
   console.error('Failed to start WhatsApp:', err);
