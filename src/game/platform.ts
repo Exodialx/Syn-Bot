@@ -227,15 +227,18 @@ ${CHANNEL_URL}`;
 }
 
 export function formatUncTeaser(): string {
-  return `🎓 *UNC (KONOHA)*
-━━━━━━━━━━━━ IN DEV ━━━━━━━━━━━━
-        coming soon to SYN.
-     · ninja · chakra.
+  return `🍥 *UNC (KONOHA)*
+━━━━━━━━━━━ IN DEV ━━━━━━━━━━━━
+A brand-new ninja village community now inside SYN.
+Clans · mission runs · jutsu · village politics.
 
 Configure:
 .configure unc
 
 Meanwhile play *Syndicates* or enable *Utility*.
+━━━
+${SYN_TAGLINE}`;
+}
 
 export function formatVersion(): string {
   return `📦 *SYN ${SYN_VERSION}*
@@ -250,10 +253,6 @@ Modules
 
 Owner: *${BOT_OWNER_NAME}*`;
 }
-━━━
-${SYN_TAGLINE}`;
-}
-
 function footer(): string {
   return `\n━━━━━━━━━━━━━━━━━━━━\n${SYN_TAGLINE}\n${CHANNEL_URL}`;
 }
@@ -341,19 +340,7 @@ export function commandAllowed(chatJid: string, cmd: string): { ok: boolean; msg
   return { ok: true };
 }
 
-export function formatVersion(): string {
-  return `📦 *SYN ${SYN_VERSION}*
 
-${SYN_TAGLINE}
-
-Modules
-🏙️ Syndicates — live
-🎣 FISCH — live
-UNC (Konoha) — In dev
-🛠️ Utility — live
-
-Owner: *${BOT_OWNER_NAME}*`;
-}
 
 export function formatBotOwner(): string {
   return `👑 *BOT OWNER*
