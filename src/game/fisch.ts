@@ -1818,6 +1818,7 @@ export function mgAnchorToss(p: FischPlayer, betRaw: string | undefined, sideRaw
     hit ? `+${win.toLocaleString()}g` : `-${bet.toLocaleString()}g`,
   ].join('\n');
 
+}
 // Pick 1 of 5 shells: one pearl pays, one crab costs double, three are empty.
 export function mgPearlDive(p: FischPlayer, betRaw: string | undefined, pickRaw: string | undefined): string {
   const bet = parseBet(p, betRaw);
@@ -1983,3 +1984,4 @@ export function mgFryFortune(p: FischPlayer, betRaw: string | undefined): string
   ].join('\n');
 }
 }
+
