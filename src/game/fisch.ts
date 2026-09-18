@@ -1,4 +1,4 @@
-import { getDb, saveDb } from '../db/database.js';
+﻿import { getDb, saveDb } from '../db/database.js';
 
 export type FischRarity = 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary' | 'Mythic' | 'Ancient';
 
@@ -1983,5 +1983,5 @@ export function mgFryFortune(p: FischPlayer, betRaw: string | undefined): string
     'bust ×3 · 1.5x ×2 · 2x · 3x · 5x · 10x',
   ].join('\n');
 }
-}
+
 
