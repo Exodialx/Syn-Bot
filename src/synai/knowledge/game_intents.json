@@ -1,0 +1,641 @@
+{
+  "intents": [
+    {
+      "name": "crime_help",
+      "topic": "crime",
+      "examples": ["how does crime work", "what is crime", "how to do crime", "crime command help", "how to commit crimes", "explain crime"],
+      "phrases": ["how does crime work", "how to crime", "crime help", "how to use crime", "what is crime", "explain crime"],
+      "keywords": ["crime", "crimes"],
+      "templates": [
+        "🕶️ *Crime* — .crime <id> to run a job. Bigger score = bigger heat. Check the list with .crime, watch your heat with .wanted, and stash profits in .bank."
+      ]
+    },
+    {
+      "name": "rob_help",
+      "topic": "rob",
+      "examples": ["how does rob work", "how to rob someone", "rob command explained", "how to rob someone", "what is rob"],
+      "phrases": ["how to rob", "how do i rob", "rob someone", "how does rob work", "how to steal from"],
+      "keywords": ["rob", "mug"],
+      "templates": [
+        "🔫 *Rob* — .rob <@player|number> to snatch their on-hand cash. Success depends on your stealth vs their security. Guards can stop you. Cooldown applies."
+      ]
+    },
+    {
+      "name": "raid_help",
+      "topic": "raid",
+      "examples": ["how does raid work", "how to raid someone", "raid command", "what is raid", "explain raid"],
+      "phrases": ["how to raid", "how do i raid", "how does raid work", "raid someone"],
+      "keywords": ["raid", "raiding"],
+      "templates": [
+        "💥 *Raid* — .raid <@player|number>. Heavier than a rob: bigger payout, bigger risk, bigger heat. Bring hearts you can afford to lose."
+      ]
+    },
+    {
+      "name": "hit_help",
+      "topic": "hit",
+      "examples": ["how does hit work", "how to hit someone", "what does hit do", "hit command explained"],
+      "phrases": ["how to hit", "how do i hit", "how does hit work", "hit someone"],
+      "templates": [
+        "🎯 *Hit* — .hit <@player|number> to attack a player directly. Damage scales with strength vs defense. Check .battle for duels."
+      ]
+    },
+    {
+      "name": "biz_help",
+      "topic": "business",
+      "examples": ["how do businesses work", "how to buy a business", "biz help", "what is biz", "how to buy a front", "business explained"],
+      "phrases": ["how do businesses work", "how to buy business", "biz help", "business help", "how to get a business", "buy a business"],
+      "keywords": ["biz", "business", "businesses", "front"],
+      "templates": [
+        "🏢 *Businesses* — .biz to browse, .biz buy <id> to purchase, .collect to pocket profits, .biz upgrade <id> to scale, .insure to protect them. Passive income is king."
+      ]
+    },
+    {
+      "name": "collect_help",
+      "topic": "collect",
+      "examples": ["how does collect work", "how to collect money", "collect command", "when can i collect", "collect income"],
+      "phrases": ["how to collect", "how does collect work", "collect income", "collect profits"],
+      "keywords": ["collect"],
+      "templates": [
+        "💵 .collect pulls income from all your businesses. It builds up over time — collect often, upgrade often."
+      ]
+    },
+    {
+      "name": "bank_help",
+      "topic": "bank",
+      "examples": ["how does the bank work", "bank help", "what is the bank", "how to use bank", "bank explained"],
+      "phrases": ["how does the bank work", "bank help", "how to use bank", "bank explained", "what is the bank"],
+      "keywords": ["bank", "banking"],
+      "templates": [
+        "🏦 *Bank* — .deposit <amount> to stash cash (safe from robberies), .withdraw to pull it out, .bank to check balance. Banked cash can still be hit with .brob — keep guards."
+      ]
+    },
+    {
+      "name": "deposit_help",
+      "topic": "deposit",
+      "examples": ["how to deposit", "how do i deposit", "deposit money", "put money in bank", "how to store cash"],
+      "phrases": ["how to deposit", "how do i deposit", "deposit money", "store cash", "save money"],
+      "keywords": ["deposit", "dep"],
+      "templates": [
+        "🏦 .deposit <amount> — moves cash into your bank where robbers can't touch it (mostly). Example: .deposit 50000"
+      ]
+    },
+    {
+      "name": "withdraw_help",
+      "topic": "withdraw",
+      "examples": ["how to withdraw", "how do i withdraw", "withdraw money", "take money out of bank", "get cash from bank"],
+      "phrases": ["how to withdraw", "how do i withdraw", "withdraw money", "take out money"],
+      "keywords": ["withdraw"],
+      "templates": [
+        "💸 .withdraw <amount> — pulls cash out of your bank. You need liquid cash to .pay, .buy and .biz upgrade."
+      ]
+    },
+    {
+      "name": "crypto_help",
+      "topic": "crypto",
+      "examples": ["how does crypto work", "how to trade crypto", "crypto help", "how to buy crypto", "what is crypto in this game", "crypto explained"],
+      "phrases": ["how does crypto work", "how to trade crypto", "how to buy crypto", "crypto help", "what is crypto", "how to sell crypto"],
+      "keywords": ["crypto", "bitcoin", "tokens"],
+      "templates": [
+        "🪙 *Crypto* — .crypto to see the market, .crypto buy <SYM> <amt> to enter, .crypto sell <SYM> <amt> to exit, .crypto portfolio to check bags. Prices move on their own — volatility is the game."
+      ]
+    },
+    {
+      "name": "shop_help",
+      "topic": "shop",
+      "examples": ["how does the shop work", "what can i buy", "shop help", "where to buy items", "store help"],
+      "phrases": ["how does the shop work", "what is in the shop", "how to buy items", "what can i buy", "shop help"],
+      "keywords": ["shop", "store"],
+      "templates": [
+        "🛒 .shop lists every item, .buy <id> to purchase, .inv to see your bag, .equip to gear up. Some items are role-locked."
+      ]
+    },
+    {
+      "name": "inventory_help",
+      "topic": "inventory",
+      "examples": ["how do i see my items", "where is my inventory", "how to check inventory", "see my items", "inventory help"],
+      "phrases": ["how to see inventory", "check my items", "my inventory", "how to see items"],
+      "keywords": ["inventory", "inv"],
+      "templates": [
+        "🎒 .inv shows everything you carry — gear, consumables, cards. Equip weapons and armor with .equip <id>."
+      ]
+    },
+    {
+      "name": "daily_help",
+      "topic": "daily",
+      "examples": ["what is daily", "how does daily work", "daily reward", "how to claim daily", "daily streak"],
+      "phrases": ["how does daily work", "what is daily", "daily reward", "daily streak", "claim daily"],
+      "keywords": ["daily", "streak"],
+      "templates": [
+        "🎁 .daily claims free cash every 24h. Miss a day and the streak resets — streaks pay bigger. Stack it with .dailies for contract jobs."
+      ]
+    },
+    {
+      "name": "leaderboard_help",
+      "topic": "leaderboard",
+      "examples": ["how does leaderboard work", "how to see rankings", "who is the richest", "leaderboard help", "how to check ranks"],
+      "phrases": ["how does leaderboard work", "how to see leaderboard", "check rankings", "who is the richest"],
+      "keywords": ["leaderboard", "rankings", "richlist"],
+      "templates": [
+        "🏆 .lb shows the richest players, .al shows achievement rankings. Climb by stacking net worth (cash + bank)."
+      ]
+    },
+    {
+      "name": "profile_help",
+      "topic": "profile",
+      "examples": ["how to see my profile", "what is profile", "how to check my stats", "profile command", "see my stats"],
+      "phrases": ["how to see my profile", "check my profile", "my stats", "see my stats", "view profile"],
+      "keywords": ["profile", "whoami"],
+      "templates": [
+        "👤 .profile shows your cash, bank, level, stats, heat, wanted level and badges. Check it after every grind session."
+      ]
+    },
+    {
+      "name": "heist_help",
+      "topic": "heists",
+      "examples": ["how do heists work", "how to heist", "what is a heist", "heist help", "how to join a heist", "heist explained"],
+      "phrases": ["how do heists work", "how to heist", "how to heist", "heist help", "how to join heist", "start a heist"],
+      "keywords": ["heist", "heists"],
+      "templates": [
+        "💎 *Heists* — solo: .sh (safe) / .jh (jackpot) / .bh (big). Lobby: .heist safe|risky then .join heist. Prep with .safe prep / .risky prep for better odds. Big score, big heat."
+      ]
+    },
+    {
+      "name": "poker_help",
+      "topic": "poker",
+      "examples": ["how does poker work", "how to play poker", "poker commands", "poker help", "start a poker game"],
+      "phrases": ["how to play poker", "how does poker work", "poker help", "start poker", "play poker"],
+      "keywords": ["poker"],
+      "templates": [
+        "🃏 *Poker* — .poker create <buyin> to open a table, .poker join <id>, .poker deal, then .poker hold|fold each round. Winner takes the pot."
+      ]
+    },
+    {
+      "name": "blackjack_help",
+      "topic": "blackjack",
+      "examples": ["how does blackjack work", "how to play blackjack", "bj help", "blackjack rules", "how to win blackjack"],
+      "phrases": ["how to play blackjack", "how does blackjack work", "blackjack help", "play blackjack"],
+      "keywords": ["blackjack"],
+      "templates": [
+        "🃏 *Blackjack* — .bj <bet> to start, then .bj hit / .bj stand / .bj double. Get close to 21 without busting. Dealer stands on 17."
+      ]
+    },
+    {
+      "name": "dice_help",
+      "topic": "dice",
+      "examples": ["how does dice work", "how to play dice", "dice game explained", "how to roll dice", "dice help"],
+      "phrases": ["how to play dice", "how does dice work", "roll dice", "dice game"],
+      "keywords": ["dice"],
+      "templates": [
+        "🎲 .dice <bet> high|low — call the roll, double or nothing. The house edge is real."
+      ]
+    },
+    {
+      "name": "slots_help",
+      "topic": "slots",
+      "examples": ["how do slots work", "how to play slots", "slots help", "how to win slots", "spin the slots"],
+      "phrases": ["how to play slots", "how do slots work", "play slots", "spin slots"],
+      "keywords": ["slots", "slot"],
+      "templates": [
+        "🎰 .slots <bet> — spin the reels. Match 3 for the jackpot. House always wins long-term; quit while ahead."
+      ]
+    },
+    {
+      "name": "coinflip_help",
+      "topic": "coinflip",
+      "examples": ["how does coinflip work", "how to coinflip", "coin flip help", "flip a coin", "coinflip explained"],
+      "phrases": ["how to coinflip", "how does coinflip work", "flip a coin", "coin flip"],
+      "keywords": ["coinflip", "cf"],
+      "templates": [
+        "🪙 .coinflip <bet> heads|tails — 50/50, pure nerve. Example: .coinflip 5000 heads"
+      ]
+    },
+    {
+      "name": "spell_help",
+      "topic": "spelling",
+      "examples": ["how does spell work", "how to play spelling", "spell game help", "what is spelling bee", "spelling game"],
+      "phrases": ["how to play spell", "how does spell work", "spelling game", "spell bee"],
+      "keywords": ["spell", "spelling"],
+      "templates": [
+        "🔤 .spell <bet> — I show a scrambled word, you unscramble it. Answer with .spell answer <word>. Fast and correct = payout."
+      ]
+    },
+    {
+      "name": "riddle_help",
+      "topic": "riddles",
+      "examples": ["how does riddle work", "how to answer a riddle", "riddle help", "give me a riddle", "riddle game"],
+      "phrases": ["how to answer riddle", "how does riddle work", "riddle help", "start a riddle"],
+      "keywords": ["riddle", "riddles"],
+      "templates": [
+        "🧩 .riddle starts one, .riddle <answer> to solve. Correct answers pay cash. Wrong ones pay pride."
+      ]
+    },
+    {
+      "name": "jail_help",
+      "topic": "jail",
+      "examples": ["how do i get out of jail", "how does jail work", "how to pay bail", "how to escape jail", "jail help"],
+      "phrases": ["how to get out of jail", "how does jail work", "pay bail", "how to escape jail", "jail help"],
+      "keywords": ["jail", "bail", "escape"],
+      "templates": [
+        "🔐 *Jail* — check status with .jail, buy freedom with .bail, or gamble on .escape (fail = more time). Doing crime while wanted raises the risk."
+      ]
+    },
+    {
+      "name": "prison_help",
+      "topic": "prison",
+      "examples": ["how does prison work", "what can i do in prison", "prison help", "how to work in prison", "prison economy"],
+      "phrases": ["how does prison work", "what to do in prison", "prison help", "prison economy"],
+      "keywords": ["prison", "commissary", "smuggle"],
+      "templates": [
+        "🔐 *Prison life* — .work earns small cash, .commissary lists supplies, .smuggle is risky money. Keep your head down or stretch your sentence."
+      ]
+    },
+    {
+      "name": "launder_help",
+      "topic": "laundering",
+      "examples": ["how does laundering work", "how to launder money", "what is laundering", "launder help", "clean money"],
+      "phrases": ["how does laundering work", "how to launder", "what is laundering", "launder money", "launder cash"],
+      "keywords": ["launder", "laundering"],
+      "templates": [
+        "🧼 .launder <amount> — converts dirty cash clean for a fee. Businessmen launder cheaper. Big washes can raise flags — split them up."
+      ]
+    },
+    {
+      "name": "guild_help",
+      "topic": "guilds",
+      "examples": ["how do guilds work", "how to create a guild", "guild help", "how to join a guild", "what is a guild"],
+      "phrases": ["how to create a guild", "how to join a guild", "guild help", "what is a guild", "guild wars"],
+      "keywords": ["guild", "guilds"],
+      "templates": [
+        "🛡️ *Guilds* — .guild create <name> to found one, .guild join <name> to join, .guild battle for wars, .territory to hold blocks. Stronger together."
+      ]
+    },
+    {
+      "name": "territory_help",
+      "topic": "territory",
+      "examples": ["how does territory work", "how to claim territory", "territory help", "what is territory", "claim land"],
+      "phrases": ["how to claim territory", "how does territory work", "claim territory", "territory help"],
+      "keywords": ["territory", "territories"],
+      "templates": [
+        "🗺️ .territory claim <name> — plant your flag. Territory generates respect and income. Defend it or lose it."
+      ]
+    },
+    {
+      "name": "battle_help",
+      "topic": "battle",
+      "examples": ["how does battle work", "how to battle someone", "battle help", "how to fight someone", "battle commands"],
+      "phrases": ["how does battle work", "how to battle", "battle help", "how to fight", "fight someone"],
+      "keywords": ["battle", "fight", "duel"],
+      "templates": [
+        "⚔️ *Battle* — .battle <@player> to challenge, .battle accept to take it, then .strike / .heavy / .aim / .guard / .special each turn. HP hits 0 → hospital."
+      ]
+    },
+    {
+      "name": "pay_help",
+      "topic": "pay",
+      "examples": ["how to send money", "how to pay someone", "pay command", "how to give someone money", "transfer cash"],
+      "phrases": ["how to pay someone", "how to send money", "send money to someone", "give money to someone"],
+      "keywords": ["pay"],
+      "templates": [
+        "💸 .pay <@player|number> <amount> — straight cash transfer. No refunds, no takebacks."
+      ]
+    },
+    {
+      "name": "bounty_help",
+      "topic": "bounties",
+      "examples": ["how do bounties work", "how to place a bounty", "what is a bounty", "how to claim a bounty", "bounty help"],
+      "phrases": ["how do bounties work", "how to place a bounty", "place a bounty", "claim a bounty", "bounty help"],
+      "keywords": ["bounty", "bounties"],
+      "templates": [
+        "🎯 *Bounties* — .bounty <@player> <amount> to put a price on someone's head, .bounties to view the board, .claim <id> to collect a finished hit."
+      ]
+    },
+    {
+      "name": "contracts_help",
+      "topic": "contracts",
+      "examples": ["how do contracts work", "how to accept a contract", "contract help", "how to complete contracts", "hit contracts"],
+      "phrases": ["how do contracts work", "contract help", "accept a contract", "complete a contract", "how to do contracts"],
+      "keywords": ["contracts", "contract"],
+      "templates": [
+        "📜 .contracts shows the board, .accept <id> takes a job, .complete <id> when it's done. Hitman contracts pay best."
+      ]
+    },
+    {
+      "name": "news_help",
+      "topic": "city news",
+      "examples": ["whats in the news", "city news", "whats happening in the city", "latest news", "city updates"],
+      "phrases": ["city news", "whats the news", "whats happening in the city", "check the news"],
+      "keywords": ["news"],
+      "templates": [
+        "📰 .news pulls the latest city feed — events, heat waves, lockdowns and player drama."
+      ]
+    },
+    {
+      "name": "heat_help",
+      "topic": "heat",
+      "examples": ["what is heat", "how does heat work", "how to lower heat", "what is wanted status", "how to lose wanted level"],
+      "phrases": ["what is heat", "how to lower heat", "how to lose heat", "what is wanted", "how to lose wanted", "lower my heat"],
+      "keywords": ["heat", "wanted"],
+      "templates": [
+        "🚨 *Heat & Wanted* — crime raises heat. High heat = more busts, hospital time and manhunts. It decays over time; .bank your cash and lay low. .wanted shows your status."
+      ]
+    },
+    {
+      "name": "guards_help",
+      "topic": "guards",
+      "examples": ["how do guards work", "how to hire a guard", "what do bodyguards do", "guards help", "hire protection"],
+      "phrases": ["how do guards work", "how to hire guards", "hire a guard", "bodyguard help", "hire protection"],
+      "keywords": ["guards", "bodyguards"],
+      "templates": [
+        "🛡️ *Guards* — .hire <@player> to put them on payroll (Businessman, max 3). They block robberies while online. .fire to cut them loose."
+      ]
+    },
+    {
+      "name": "achievements_help",
+      "topic": "achievements",
+      "examples": ["how do achievements work", "how to get badges", "achievements help", "how to earn badges", "list achievements"],
+      "phrases": ["how do achievements work", "how to get badges", "earn badges", "achievements help"],
+      "keywords": ["achievements", "badges", "achievement"],
+      "templates": [
+        "🏅 .achievements lists every badge and how to earn it. .al shows the badge leaderboard. Some badges are secret — keep playing."
+      ]
+    },
+    {
+      "name": "cooldown_help",
+      "topic": "cooldowns",
+      "examples": ["how do cooldowns work", "check my cooldowns", "when can i rob again", "cooldown help", "when does crime reset"],
+      "phrases": ["how do cooldowns work", "check cooldowns", "when can i rob again", "when can i crime again"],
+      "keywords": ["cooldown", "cooldowns", "cd"],
+      "templates": [
+        "⏳ .cd shows every cooldown you're sitting on. Cooldowns tick down in real time — plan your grind loop."
+      ]
+    },
+    {
+      "name": "daily_help",
+      "topic": "daily",
+      "examples": ["how does daily work", "what is daily reward", "how to claim daily", "when does daily reset", "daily reward"],
+      "phrases": ["how does daily work", "claim daily", "daily reward", "daily reset", "daily streak"],
+      "keywords": ["daily", "dailies"],
+      "templates": [
+        "🎁 .daily — free cash every 24h. Streaks pay more. Miss a day, lose the streak. .dailies shows contract jobs too."
+      ]
+    },
+    {
+      "name": "leaderboard_help",
+      "topic": "leaderboard",
+      "examples": ["how does the leaderboard work", "how to see rankings", "who is richest", "leaderboard help", "check richlist"],
+      "phrases": ["how does leaderboard work", "see the leaderboard", "who is richest", "richlist help"],
+      "keywords": ["leaderboard", "richlist"],
+      "templates": [
+        "🏆 .lb — richest players, .lb achievements for badges, .al for the badge board. Net worth = cash + bank."
+      ]
+    },
+    {
+      "name": "profile_help",
+      "topic": "profile",
+      "examples": ["how to see my profile", "what does profile show", "check my stats", "profile help", "how to see my stats"],
+      "phrases": ["see my profile", "check my profile", "my stats", "see my stats", "my profile"],
+      "keywords": ["profile", "whoami"],
+      "templates": [
+        "👤 .profile — cash, bank, level, class, stats, heat, hearts and badges in one view. .profile is your ID in the city."
+      ]
+    },
+    {
+      "name": "crypto_help",
+      "topic": "crypto",
+      "examples": ["how does crypto work", "how to buy crypto", "how to trade crypto", "crypto help", "how to sell crypto", "crypto market explained"],
+      "phrases": ["how does crypto work", "how to buy crypto", "how to sell crypto", "crypto help", "how to trade crypto"],
+      "keywords": ["crypto", "bitcoin", "tokens"],
+      "templates": [
+        "🪙 *Crypto* — .crypto (market), .crypto buy <SYM> <amt>, .crypto sell <SYM> <amt>, .crypto portfolio, .crypto top. Volatile — paper hands get cooked."
+      ]
+    },
+    {
+      "name": "shop_help",
+      "topic": "shop",
+      "examples": ["how does the shop work", "what is in the shop", "shop help", "where to buy items", "what can i buy"],
+      "phrases": ["how does the shop work", "what does the shop sell", "shop help", "what is in the shop"],
+      "keywords": ["shop", "store"],
+      "templates": [
+        "🛒 .shop — browse items, .buy <id> to purchase, .inv to check your bag, .equip to use gear. Name Change Cards, premium and more."
+      ]
+    },
+    {
+      "name": "heist_help",
+      "topic": "heists",
+      "examples": ["how do heists work", "how to heist", "heist help", "how to join a heist", "what is a heist"],
+      "phrases": ["how do heists work", "how to heist", "how to join a heist", "start a heist", "heist help"],
+      "keywords": ["heist", "heists"],
+      "templates": [
+        "💎 *Heists* — classic solo: .sh (safe) .jh (jackpot) .bh (big). Lobbies: .heist safe|risky then .join heist. Prep first with .safe prep / .risky prep. Big heat, bigger cash."
+      ]
+    },
+    {
+      "name": "guild_help",
+      "topic": "guild",
+      "examples": ["how do guilds work", "how to make a guild", "guild help", "how to join a guild", "guild wars"],
+      "phrases": ["how to make a guild", "how to create a guild", "how to join a guild", "guild help", "guild wars"],
+      "keywords": ["guild", "guilds", "clan", "clans"],
+      "templates": [
+        "🛡️ *Guilds* — .guild create <name>, .guild join <name>, .guild battle for wars, .territory to hold ground. Guilds split wins and share glory."
+      ]
+    },
+    {
+      "name": "battle_help",
+      "topic": "battle",
+      "examples": ["how does battle work", "how to battle someone", "battle help", "how to attack someone", "fight someone"],
+      "phrases": ["how does battle work", "how to battle", "battle help", "how to fight someone", "challenge someone"],
+      "keywords": ["battle", "fighting"],
+      "templates": [
+        "⚔️ *Battle* — .battle <@player> to challenge. Moves: .battle strike / heavy / aim / guard / special. Watch hearts — lose them all and you're in the hospital."
+      ]
+    },
+    {
+      "name": "pay_help",
+      "topic": "pay",
+      "examples": ["how to pay someone", "how to send money", "pay command help", "how to transfer money", "give someone money"],
+      "phrases": ["how to pay someone", "how to send money", "how to give money", "send cash"],
+      "keywords": ["pay", "paying"],
+      "templates": [
+        "💸 .pay <@player|number> <amount> — clean and instant. No takebacks, no refunds."
+      ]
+    },
+    {
+      "name": "heat_help",
+      "topic": "heat",
+      "examples": ["what is heat", "how does heat work", "how to lower heat", "what is wanted status", "how to lose cops"],
+      "phrases": ["what is heat", "how does heat work", "lower heat", "lose wanted", "what is wanted"],
+      "keywords": ["heat", "wanted", "cops"],
+      "templates": [
+        "🚨 *Heat* — crime builds it, time decays it. High heat = busts, hospital, prison. .wanted shows your status. Smart players bank cash before the heat spikes."
+      ]
+    },
+    {
+      "name": "jail_help",
+      "topic": "jail",
+      "examples": ["how does jail work", "how to get out of jail", "how to pay bail", "jail help", "how to escape prison"],
+      "phrases": ["how does jail work", "get out of jail", "how to pay bail", "how to escape", "jail help"],
+      "keywords": ["jail", "bail"],
+      "templates": [
+        "🔐 *Jail* — .jail to check status, .bail to buy out, .escape to gamble on freedom (fail = more time). While inside: .work, .commissary, .smuggle."
+      ]
+    },
+    {
+      "name": "launder_help",
+      "topic": "laundering",
+      "examples": ["how does laundering work", "how to launder money", "what is laundering", "launder help", "clean money"],
+      "phrases": ["how does laundering work", "how to launder money", "what is laundering", "clean money"],
+      "keywords": ["launder", "laundering"],
+      "templates": [
+        "🧼 .launder <amount> — wash dirty cash for a cut. Businessmen get better rates. Shells (.shell) hide the paper trail."
+      ]
+    },
+    {
+      "name": "crypto_help",
+      "topic": "crypto",
+      "examples": ["how does crypto work", "how to trade crypto", "crypto help", "how to invest in crypto", "what is crypto market"],
+      "phrases": ["how does crypto work", "how to trade crypto", "crypto help", "how to buy crypto", "how to sell crypto"],
+      "keywords": ["crypto", "cryptocurrency"],
+      "templates": [
+        "🪙 *Crypto* — .crypto (market), .crypto buy <SYM> <amt>, .crypto sell <SYM> <amt>, .crypto portfolio, .crypto watch <SYM>. Prices move on their own — trade the waves."
+      ]
+    },
+    {
+      "name": "daily_help",
+      "topic": "daily",
+      "examples": ["how does daily work", "what is daily reward", "daily help", "when does daily reset", "daily streak explained"],
+      "phrases": ["how does daily work", "what is daily", "daily reward", "daily reset", "daily streak"],
+      "keywords": ["daily", "dailies"],
+      "templates": [
+        "🎁 .daily — free cash every day. Streaks multiply the payout; miss a day and it resets. .dailies adds contract jobs on top."
+      ]
+    },
+    {
+      "name": "leaderboard_help",
+      "topic": "leaderboard",
+      "examples": ["how does leaderboard work", "how to see richlist", "leaderboard help", "who is richest", "how do rankings work"],
+      "phrases": ["how does leaderboard work", "see the leaderboard", "who is the richest", "check rankings"],
+      "keywords": ["leaderboard", "richlist"],
+      "templates": [
+        "🏆 .lb — cash rankings, .al — badge rankings. Rank = cash + bank. Get on it by stacking, not by asking 😎"
+      ]
+    },
+    {
+      "name": "profile_help",
+      "topic": "profile",
+      "examples": ["how to see my profile", "what does profile show", "profile help", "how to check my stats", "see my stats"],
+      "phrases": ["see my profile", "check my profile", "my stats", "view my profile", "profile help"],
+      "keywords": ["profile", "whoami"],
+      "templates": [
+        "👤 .profile — cash, bank, level, class, stats, heat, hearts, badges and your net-worth rank. Your whole rep in one card."
+      ]
+    },
+    {
+      "name": "shop_help",
+      "topic": "shop",
+      "examples": ["how does the shop work", "what can i buy in shop", "shop help", "where to buy items", "store help"],
+      "phrases": ["how does the shop work", "what is in the shop", "where to buy items", "shop help", "store help"],
+      "keywords": ["shop", "store"],
+      "templates": [
+        "🛒 .shop — item catalog, .buy <id> to purchase, .inv to check your bag, .equip to gear up. Name Change Card lives here too."
+      ]
+    },
+    {
+      "name": "heist_types",
+      "topic": "heists",
+      "examples": ["what is the difference between safe and risky heist", "safe vs risky heist", "which heist is better", "heist types"],
+      "phrases": ["safe vs risky", "safe or risky", "difference between safe and risky", "heist types"],
+      "templates": [
+        "💎 *Heist tiers*\n▸ .sh — safe heist: low risk, low heat\n▸ .jh — jackpot heist: medium\n▸ .bh — big heist: high risk, high heat\n▸ .safe / .risky — multiplayer lobbies\nPrep before you go in."
+      ]
+    },
+    {
+      "name": "pvp_help",
+      "topic": "pvp",
+      "examples": ["how does pvp work", "how to attack players", "how to fight other players", "pvp help", "how to raid players"],
+      "phrases": ["how does pvp work", "how to attack players", "how to fight players", "pvp help", "player vs player"],
+      "keywords": ["pvp"],
+      "templates": [
+        "🔫 *PvP* — .rob (steal cash), .raid (heavy hit), .hit (assault), .battle (turn-based duel), .brob (bank raid). Every move builds heat — and targets."
+      ]
+    },
+    {
+      "name": "cooldown_help",
+      "topic": "cooldowns",
+      "examples": ["how do cooldowns work", "check my cooldowns", "when can i rob again", "cooldown help", "why am i on cooldown"],
+      "phrases": ["how do cooldowns work", "check cooldowns", "when can i rob again", "cooldown help"],
+      "keywords": ["cooldown", "cooldowns"],
+      "templates": [
+        "⏳ .cd shows every cooldown and its timer. Cooldowns keep the city fair — chain your loop: .crime → .collect → .daily."
+      ]
+    },
+    {
+      "name": "wanted_help",
+      "topic": "wanted",
+      "examples": ["how to check wanted status", "what is wanted", "how to lower wanted level", "wanted help", "am i wanted"],
+      "phrases": ["what is wanted", "check wanted", "wanted status", "how to lose wanted", "am i wanted"],
+      "keywords": ["wanted"],
+      "templates": [
+        "🚨 .wanted shows your wanted level. It decays over time — or cools faster if you stop committing crimes. High wanted = higher bust chance on every job."
+      ]
+    },
+    {
+      "name": "pay_help",
+      "topic": "pay",
+      "examples": ["how to pay someone", "how to give money to someone", "pay command help", "how to transfer money"],
+      "phrases": ["how to pay someone", "how to give money", "transfer money", "pay someone"],
+      "keywords": ["pay", "transfer"],
+      "templates": [
+        "💸 .pay <@player|number> <amount> — instant transfer. No refunds, no chargebacks, no tears."
+      ]
+    },
+    {
+      "name": "bounty_help",
+      "topic": "bounties",
+      "examples": ["how do bounties work", "how to place a bounty", "bounty help", "how to claim a bounty", "what are bounties"],
+      "phrases": ["how do bounties work", "place a bounty", "claim a bounty", "bounty help", "how to bounty someone"],
+      "keywords": ["bounty", "bounties"],
+      "templates": [
+        "🎯 *Bounties* — .bounty <@player> <amount> to post one, .bounties to view the board, .claim <id> when the hit lands. Blood money is still money."
+      ]
+    },
+    {
+      "name": "territory_help",
+      "topic": "territory",
+      "examples": ["how does territory work", "how to claim territory", "territory help", "what is territory", "how to take territory"],
+      "phrases": ["how does territory work", "how to claim territory", "territory help", "claim land"],
+      "keywords": ["territory", "territories"],
+      "templates": [
+        "🗺️ .territory claim <name> — hold ground for income and rep. Rivals can contest it. Defend what's yours."
+      ]
+    },
+    {
+      "name": "battle_help",
+      "topic": "battle",
+      "examples": ["how does battle work", "how to battle", "battle commands", "how to fight someone", "battle help"],
+      "phrases": ["how does battle work", "how to battle someone", "battle help", "how to fight", "battle commands"],
+      "keywords": ["battle"],
+      "templates": [
+        "⚔️ *Battle* — .battle <@player> to challenge. Moves: strike · heavy · aim · guard · special. Reduce their hearts to zero. Winner takes bragging rights."
+      ]
+    },
+    {
+      "name": "payday",
+      "topic": "daily",
+      "examples": ["when do i get paid", "when is payday", "how often can i collect", "when does collect reset"],
+      "phrases": ["when do i get paid", "when does collect reset", "how often can i collect", "when is payday"],
+      "templates": [
+        "💵 .collect builds up over time — check .biz for rates, .cd for timers. Stack businesses to stack the drip."
+      ]
+    },
+    {
+      "name": "synai_about",
+      "topic": "synai",
+      "examples": ["what is synai", "what is syn ai", "tell me about synai", "synai explained", "who is synai"],
+      "phrases": ["what is synai", "what is syn ai", "about synai", "what is synai"],
+      "keywords": ["synai"],
+      "templates": [
+        "🧠 *SynAI* — the offline intelligence engine inside Syn Bot. Pattern matching + TF-IDF intent classification + a teachable knowledge base. No LLM, no API, no keys, no cost. <100ms answers, 24/7."
+      ]
+    }
+  ]
+}
